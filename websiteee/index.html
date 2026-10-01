@@ -1,0 +1,2935 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>بوسي سويت | Bosy Sweet - بوتيك المخبوزات والحلويات الحرفية</title>
+
+  <!-- وسوم المشاركة ومعاينة الروابط (Open Graph & Twitter Cards) -->
+  <meta name="description" content="بوسي سويت (Bosy Sweet) - بوتيك الحلويات والمخبوزات الحرفية. تشيز كيك سان سيباستيان، دوناتس بريوش هشة، ومخبوزات طازجة بالزبدة الطبيعية. اطلب الآن مباشرة عبر واتساب.">
+  <meta name="keywords" content="بوسي سويت, Bosy Sweet, حلويات, مخبوزات, تشيز كيك, دوناتس, سان سيباستيان, كافيه, حلويات مصر">
+  <meta name="author" content="Bosy Sweet">
+  <meta name="theme-color" content="#FAF7F2">
+
+  <!-- Open Graph / Facebook / WhatsApp -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="ar_EG">
+  <meta property="og:site_name" content="بوسي سويت | Bosy Sweet">
+  <meta property="og:title" content="بوسي سويت (Bosy Sweet) | حلويات ومخبوزات حرفية فاخرة">
+  <meta property="og:description" content="نخبز لكم بحب يومياً.. تشيز كيك مخملي، دوناتس بريوش هشة، ومخبوزات طازجة بالزبدة الطبيعية الفاخرة. تصفح المنيو واطلب عبر واتساب.">
+  <meta property="og:image" content="logo.png">
+  <meta property="og:image:width" content="500">
+  <meta property="og:image:height" content="500">
+  <meta property="og:image:alt" content="شعار بوسي سويت للحلويات والمخبوزات">
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="بوسي سويت (Bosy Sweet) | حلويات ومخبوزات حرفية">
+  <meta name="twitter:description" content="تشيز كيك مخملي، دوناتس بريوش هشة، ومخبوزات طازجة بالزبدة الطبيعية. اطلب أونلاين الآن.">
+  <meta name="twitter:image" content="logo.png">
+
+  <!-- أيقونة الموقع (Favicon) -->
+  <link rel="icon" type="image/png" href="logo.png">
+  <link rel="apple-touch-icon" href="logo.png">
+
+  <!-- خطوط عربية فاخرة (Marhey + Fredoka + Alexandria + Cairo + Amiri + El Messiri) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="https://fonts.gstatic.com/s/alexandria/v6/UMBXrPdDqW66y0Y2usFeai3dAw.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="https://fonts.gstatic.com/s/cairo/v31/SLXVc1nY6HkvangtZmpQdkhzfH5lkSscRiyS.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="https://fonts.gstatic.com/s/marhey/v8/x3dhck7Laq-T7wlRlo8k.woff2">
+  <link href="https://fonts.googleapis.com/css2?family=Alexandria:wght@300;400;500;600;700;800;900&family=Amiri:wght@400;700&family=Cairo:wght@300;400;500;600;700;800;900&family=El+Messiri:wght@600;700&family=Fredoka:wght@500;600;700&family=Marhey:wght@500;600;700&display=block" rel="stylesheet">
+
+  <!-- مكتبة الأيقونات Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- مكتبات Firebase Firestore السحابية (Compat v10) -->
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore-compat.js"></script>
+
+  <!-- مكتبة التنبيهات الفاخرة SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <!-- Tailwind CSS عبر CDN مع تخصيص الألوان الحرفية الدافئة -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            paper: '#FAF7F2',
+            choco: {
+              950: '#1a100b',
+              900: '#231610',
+              800: '#38231a',
+              700: '#4d3226',
+              600: '#634335',
+            },
+            caramel: {
+              DEFAULT: '#C27A38',
+              hover: '#a86529',
+              light: '#dfb282',
+              soft: '#fbf3ea',
+            },
+            cream: {
+              50: '#FDFBF7',
+              100: '#FAF7F2',
+              200: '#F2EAE0',
+              300: '#E5D9CB',
+            }
+          },
+          fontFamily: {
+            alexandria: ['Alexandria', 'Cairo', 'sans-serif'],
+            cairo: ['Cairo', 'sans-serif'],
+            amiri: ['Amiri', 'serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style id="anti-fouc">
+    /* منع وميض أو تبديل شكل الخطوط العربية وتثبيتها 100% بدون أي اهتزاز */
+    html:not(.fonts-loaded) body {
+      opacity: 0 !important;
+      visibility: hidden !important;
+    }
+    html.fonts-loaded body {
+      opacity: 1 !important;
+      visibility: visible !important;
+      transition: opacity 0.12s ease-in;
+    }
+    /* ضمان ثبات وتنسيق بادج السعر بالاتجاه والترتيب الصحيح فوراً لمنع أي لخبطة */
+    .price-badge-pill {
+      display: inline-flex !important;
+      align-items: center !important;
+      direction: rtl !important;
+      unicode-bidi: isolate !important;
+      white-space: nowrap !important;
+    }
+    html {
+      scroll-behavior: auto;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+    html.page-ready {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: 'Alexandria', 'Cairo', sans-serif;
+      max-width: 100%;
+      overflow-x: hidden;
+    }
+    .font-cairo {
+      font-family: 'Cairo', sans-serif !important;
+    }
+    .font-brand-ar {
+      font-family: 'Marhey', 'El Messiri', 'Cairo', sans-serif !important;
+    }
+    .font-brand-en {
+      font-family: 'Fredoka', 'Cairo', sans-serif !important;
+    }
+    .font-serif-arabic {
+      font-family: 'Amiri', serif;
+    }
+    /* نعومة وانسيابية خط النافبار بدون أي اهتزاز أو ارتداد */
+    #nav-indicator {
+      transition: left 0.35s cubic-bezier(0.4, 0, 0.2, 1), width 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+
+    /* ==================== مؤثرات الخلفية الفاخرة (Ambient Glow & Texture) ==================== */
+    @keyframes float-blob-1 {
+      0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+      50% { transform: translate3d(40px, -35px, 0) scale(1.08); }
+    }
+    @keyframes float-blob-2 {
+      0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+      50% { transform: translate3d(-35px, 45px, 0) scale(1.12); }
+    }
+    @keyframes float-blob-3 {
+      0%, 100% { transform: translate3d(0, 0, 0) scale(1.05); }
+      50% { transform: translate3d(30px, 30px, 0) scale(0.95); }
+    }
+    @keyframes float-blob-4 {
+      0%, 100% { transform: translate3d(0, 0, 0) scale(0.98); }
+      50% { transform: translate3d(-45px, -30px, 0) scale(1.06); }
+    }
+
+    .blob-animate-1 { animation: float-blob-1 20s ease-in-out infinite; will-change: transform; }
+    .blob-animate-2 { animation: float-blob-2 24s ease-in-out infinite; will-change: transform; }
+    .blob-animate-3 { animation: float-blob-3 22s ease-in-out infinite; will-change: transform; }
+    .blob-animate-4 { animation: float-blob-4 26s ease-in-out infinite; will-change: transform; }
+
+    /* نقوشات المخبوزات الحرفية الرقيقة */
+    .artisanal-pattern {
+      background-image: url("data:image/svg+xml,%3Csvg width='120' height='120' viewBox='0 0 120 120' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23231610' fill-opacity='1' fill-rule='evenodd'%3E%3Cpath d='M25 12 C25 18 28 21 34 21 C28 21 25 24 25 30 C25 24 22 21 16 21 C22 21 25 18 25 12 Z'/%3E%3Ccircle cx='85' cy='20' r='1.8'/%3E%3Ccircle cx='38' cy='85' r='1.5'/%3E%3Cpath d='M85 75 C82 72 80 65 86 60 C92 55 99 60 97 67 C95 72 90 77 85 75 Z' fill='none' stroke='%23231610' stroke-width='1.5' stroke-linecap='round'/%3E%3Cpath d='M75 102 C70 98 72 90 77 88 C82 86 86 92 83 97 C81 100 78 103 75 102 Z' fill='none' stroke='%23231610' stroke-width='1.5'/%3E%3Cpath d='M74 91 C77 93 79 97 81 100' fill='none' stroke='%23231610' stroke-width='1.2' stroke-linecap='round'/%3E%3Cpath d='M95 38 C95 41 97 43 100 43 C97 43 95 45 95 48 C95 45 93 43 90 43 C93 43 95 41 95 38 Z'/%3E%3Cpath d='M20 75 C20 70 25 66 30 68 C35 70 38 76 34 80 C30 84 22 81 20 75 Z' fill='none' stroke='%23231610' stroke-width='1.5'/%3E%3Cpath d='M22 75 L32 75' stroke='%23231610' stroke-width='1.2' stroke-linecap='round'/%3E%3C/g%3E%3C/svg%3E");
+      background-repeat: repeat;
+    }
+
+    /* حركة ولمعان البريق في قسم الهيرو */
+    @keyframes sparkle-float-1 {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(-8px) rotate(3deg); }
+    }
+    @keyframes sparkle-float-2 {
+      0%, 100% { transform: translateY(0px) rotate(0deg); }
+      50% { transform: translateY(8px) rotate(-4deg); }
+    }
+    @keyframes sparkle-float-3 {
+      0%, 100% { transform: translateY(0px) scale(1); }
+      50% { transform: translateY(-6px) scale(1.04); }
+    }
+    @keyframes twinkle-glow {
+      0%, 100% { opacity: 0.35; transform: scale(0.85); }
+      50% { opacity: 1; transform: scale(1.2); }
+    }
+
+    .animate-sparkle-1 { animation: sparkle-float-1 4.5s ease-in-out infinite; will-change: transform; }
+    .animate-sparkle-2 { animation: sparkle-float-2 5.2s ease-in-out infinite; will-change: transform; }
+    .animate-sparkle-3 { animation: sparkle-float-3 4.8s ease-in-out infinite; will-change: transform; }
+    .animate-twinkle { animation: twinkle-glow 3s ease-in-out infinite; }
+    .animate-twinkle-delay { animation: twinkle-glow 3.5s ease-in-out 1.2s infinite; }
+
+    /* نبض هادئ ودافئ لبادج صورة قسم قصتنا */
+    @keyframes soft-badge-pulse {
+      0%, 100% { transform: scale(1); box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); }
+      50% { transform: scale(1.025); box-shadow: 0 8px 25px rgba(194, 122, 56, 0.22); }
+    }
+    .animate-badge-pulse {
+      animation: soft-badge-pulse 3.2s ease-in-out infinite;
+    }
+
+    /* حلقة التوهج النبضية الفاخرة لزرار حجز المناسبات */
+    @keyframes pulse-glow-ring {
+      0% {
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.65), 0 8px 25px rgba(5, 150, 105, 0.35);
+      }
+      70% {
+        box-shadow: 0 0 0 13px rgba(16, 185, 129, 0), 0 12px 30px rgba(5, 150, 105, 0.45);
+      }
+      100% {
+        box-shadow: 0 0 0 0 rgba(16, 185, 129, 0), 0 8px 25px rgba(5, 150, 105, 0.35);
+      }
+    }
+    .btn-pulse-glow {
+      animation: pulse-glow-ring 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    /* طفو بطيء وانسيابي للوجو الفوتر */
+    @keyframes float-slow {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-7px); }
+    }
+    .animate-float-slow {
+      animation: float-slow 4s ease-in-out infinite;
+    }
+
+    /* حركات الظهور الانسيابية عند النزول بالسكرول (Smooth Scroll Reveal) */
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1), transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+    .reveal-on-scroll.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    /* منع وميض واختفاء الأقسام عند إعادة التحميل (Zero-Flicker Reload Protection) */
+    html:not(.page-ready) .reveal-on-scroll {
+      opacity: 1 !important;
+      transform: none !important;
+      transition: none !important;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal-on-scroll {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+      .btn-pulse-glow, .animate-float-slow, .animate-badge-pulse {
+        animation: none !important;
+      }
+  </style>
+
+  <!-- فحص اكتمال تحميل الخطوط فك شفرة العرض فوراً بدون أي وميض -->
+  <script>
+    (function() {
+      function unlockFonts() {
+        document.documentElement.classList.add('fonts-loaded');
+      }
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(unlockFonts).catch(unlockFonts);
+        setTimeout(unlockFonts, 150);
+      } else {
+        unlockFonts();
+      }
+    })();
+  </script>
+</head>
+
+<body class="bg-[#FAF7F2] text-choco-900 antialiased selection:bg-caramel-light selection:text-choco-950 flex flex-col min-h-screen relative w-full max-w-full overflow-x-hidden">
+
+  <!-- ==================== كرات الإضاءة الدافئة وخلفية الملمس الحرفي (Ambient Atmosphere & Background Blobs) ==================== -->
+  <div class="fixed inset-0 overflow-hidden pointer-events-none -z-10 select-none" aria-hidden="true">
+    <!-- كرة 1: كراميل دافئ وعسل ذهبي أعلى اليمين (منطقة الهيرو وقائمة المنيو) -->
+    <div class="absolute -top-32 -right-32 w-[520px] h-[520px] sm:w-[720px] sm:h-[720px] rounded-full bg-gradient-to-br from-[#dfb282]/35 via-[#C27A38]/25 to-transparent blur-[110px] blob-animate-1"></div>
+
+    <!-- كرة 2: وردي هادئ ولمسة كراميل أعلى اليسار (عنوان الهيرو) -->
+    <div class="absolute top-20 -left-28 w-[450px] h-[450px] sm:w-[620px] sm:h-[620px] rounded-full bg-gradient-to-tr from-[#fbcfe8]/25 via-[#fed7aa]/35 to-transparent blur-[120px] blob-animate-2"></div>
+
+    <!-- كرة 3: عسلي دافئ في منتصف الصفحة (قسم المنيو الحرفي) -->
+    <div class="absolute top-[45%] -right-24 w-[480px] h-[480px] sm:w-[650px] sm:h-[650px] rounded-full bg-gradient-to-bl from-[#f59e0b]/20 via-[#C27A38]/20 to-transparent blur-[130px] blob-animate-3"></div>
+
+    <!-- كرة 4: فانيليا ووردي دافئ أسفل اليسار (المنيو وقسم قصتنا) -->
+    <div class="absolute bottom-10 -left-24 w-[460px] h-[460px] sm:w-[640px] sm:h-[640px] rounded-full bg-gradient-to-tr from-[#fed7aa]/30 via-[#fbcfe8]/20 to-transparent blur-[125px] blob-animate-4"></div>
+
+    <!-- طبقة النقش الحرفي الورقي الرقيق (Subtle Artisanal Texture) -->
+    <div class="absolute inset-0 artisanal-pattern opacity-[0.035]"></div>
+  </div>
+
+  <!-- ==================== شريط التنقل (Navbar) الأنيق مع المؤشر الانسيابي ==================== -->
+  <header class="sticky top-0 z-40 bg-[#FAF7F2]/95 backdrop-blur-md border-b border-[#231610]/10 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-20 sm:h-22">
+
+        <!-- لوجو واسم البوتيك الفاخر بدقة عالية كاملة وبدون أي بكسلة -->
+        <a href="#home" class="flex items-center gap-3.5 group">
+          <div class="relative w-14 h-14 sm:w-16 sm:h-16 rounded-full overflow-hidden border-2 border-caramel/40 shadow-md group-hover:scale-105 group-hover:border-caramel transition-all duration-300 bg-[#FEF6EB] flex items-center justify-center p-0.5 flex-shrink-0">
+            <img src="mascot_avatar_v2.png" alt="شعار بوسي سويت" class="w-full h-full object-cover rounded-full" />
+          </div>
+          <div class="flex flex-col justify-center">
+            <div class="font-brand-ar text-xl sm:text-2xl md:text-[27px] font-bold text-choco-950 leading-snug tracking-normal">
+              بوسي <span class="text-caramel">سويت</span>
+            </div>
+            <div class="flex items-center gap-2 mt-0.5" dir="rtl">
+              <span class="font-brand-en text-xs sm:text-[13px] font-bold text-caramel tracking-wide inline-block" dir="ltr">Bosy Sweet</span>
+              <span class="w-1 h-1 rounded-full bg-caramel/40"></span>
+              <span class="text-[11px] sm:text-xs font-semibold text-[#6B5347] font-cairo">حلويات ومخبوزات</span>
+            </div>
+          </div>
+        </a>
+
+        <!-- روابط التنقل (ثابتة العرض والوزن لمنع أي تردد أو اهتزاز) -->
+        <nav id="desktop-nav" class="relative hidden md:flex items-center gap-8 py-2">
+          <a href="#home" class="nav-link font-bold text-sm py-1 text-choco-900 transition-colors duration-200">
+            الرئيسية
+          </a>
+          <a href="#menu" class="nav-link font-bold text-sm py-1 text-choco-700/60 hover:text-choco-900 transition-colors duration-200">
+            المنيو
+          </a>
+          <a href="#about" class="nav-link font-bold text-sm py-1 text-choco-700/60 hover:text-choco-900 transition-colors duration-200">
+            قصتنا
+          </a>
+          <a href="#contact" class="nav-link font-bold text-sm py-1 text-choco-700/60 hover:text-choco-900 transition-colors duration-200">
+            تواصل معنا
+          </a>
+          <!-- الخط الكراميلي المنزلق بنعومة فائقة وبدون أي Jitter -->
+          <span id="nav-indicator" class="absolute bottom-0 h-0.5 bg-caramel rounded-full pointer-events-none opacity-0" style="left: 0; width: 0; transition: none;"></span>
+        </nav>
+
+        <!-- أدوات الهيدر (السلة + زر الطلب + زر القائمة للموبايل) -->
+        <div class="flex items-center gap-3">
+          <!-- زر سلة المشتريات التفاعلي -->
+          <button 
+            id="cart-toggle-btn" 
+            type="button" 
+            onclick="toggleCart(true)" 
+            aria-label="سلة المشتريات" 
+            class="relative p-2.5 rounded-xl text-choco-900 hover:bg-cream-200 transition-colors cursor-pointer group"
+          >
+            <i class="fa-solid fa-bag-shopping text-xl group-hover:scale-110 transition-transform"></i>
+            <span id="cart-badge" class="absolute -top-1 -right-1 bg-caramel text-white text-[11px] font-bold w-5 h-5 rounded-full flex items-center justify-center shadow-sm transition-transform duration-200">
+              ٠
+            </span>
+          </button>
+
+          <!-- زر طلب واتساب ومواعيد العمل تحته بأناقة -->
+          <div class="hidden sm:flex flex-col items-end justify-center">
+            <a id="header-whatsapp-btn" href="https://wa.me/201068617307" target="_blank" class="inline-flex items-center gap-2 bg-choco-900 hover:bg-choco-800 text-cream-50 px-4 py-2 rounded-xl font-semibold text-xs shadow-xs hover:shadow transition-all duration-300">
+              <i class="fa-brands fa-whatsapp text-emerald-400 text-sm"></i>
+              <span>طلب واتساب</span>
+            </a>
+            <div class="flex items-center gap-1.5 text-[11px] font-bold text-choco-800 mt-1 select-none font-cairo">
+              <i class="fa-regular fa-clock text-caramel text-[11px]"></i>
+              <span id="header-working-hours">يومياً: ٩:٠٠ ص - ١١:٠٠ م</span>
+            </div>
+          </div>
+
+          <!-- زر القائمة في الموبايل (Hamburger) -->
+          <button id="mobile-menu-btn" type="button" aria-label="فتح القائمة" class="md:hidden p-2 rounded-xl text-choco-900 hover:bg-cream-200 focus:outline-none transition-colors">
+            <i id="menu-icon" class="fa-solid fa-bars text-xl"></i>
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- قائمة الموبايل المنسدلة -->
+    <div id="mobile-menu" class="hidden md:hidden border-t border-[#231610]/10 bg-[#FAF7F2] px-4 pt-3 pb-6 space-y-2.5 shadow-lg">
+      <a href="#home" class="mobile-nav-link block py-2.5 px-4 rounded-xl text-choco-900 font-bold bg-cream-200/60">
+        <i class="fa-solid fa-house ml-2 text-caramel"></i> الرئيسية
+      </a>
+      <a href="#menu" class="mobile-nav-link block py-2.5 px-4 rounded-xl text-choco-700 font-medium hover:bg-cream-200/40">
+        <i class="fa-solid fa-utensils ml-2 text-caramel"></i> المنيو
+      </a>
+      <a href="#about" class="mobile-nav-link block py-2.5 px-4 rounded-xl text-choco-700 font-medium hover:bg-cream-200/40">
+        <i class="fa-solid fa-heart ml-2 text-caramel"></i> قصتنا
+      </a>
+      <a href="#contact" class="mobile-nav-link block py-2.5 px-4 rounded-xl text-choco-700 font-medium hover:bg-cream-200/40">
+        <i class="fa-solid fa-phone ml-2 text-caramel"></i> تواصل معنا
+      </a>
+      <div class="pt-2">
+        <button type="button" onclick="toggleCart(true); mobileMenu.classList.add('hidden');" class="flex items-center justify-center gap-2 w-full bg-[#C27A38] text-white py-3 rounded-xl font-bold shadow-md cursor-pointer">
+          <i class="fa-solid fa-bag-shopping text-base"></i>
+          <span>فتح سلة المشتريات</span>
+        </button>
+      </div>
+      <div class="text-center text-xs font-semibold text-choco-700 flex items-center justify-center gap-1.5 pt-2 border-t border-[#231610]/10">
+        <i class="fa-regular fa-clock text-caramel text-xs"></i>
+        <span>أوقات العمل:</span>
+        <span id="mobile-working-hours" class="font-bold text-choco-950">يومياً: ٩:٠٠ ص - ١١:٠٠ م</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- حقن فوري وتلقائي لبيانات السلة قبل رسم الصفحة لمنع أي وميض بالأرقام -->
+  <script>
+    (function() {
+      try {
+        var rawCart = localStorage.getItem('bosy_sweet_cart_v1');
+        if (rawCart) {
+          var c = JSON.parse(rawCart);
+          if (Array.isArray(c) && c.length > 0) {
+            var q = c.reduce(function(sum, item) { return sum + (item.quantity || 1); }, 0);
+            var badge = document.getElementById('cart-badge');
+            if (badge) {
+              badge.textContent = q.toString().replace(/[0-9]/g, function(d) { return '٠١٢٣٤٥٦٧٨٩'[d]; });
+            }
+          }
+        }
+      } catch(e) {}
+    })();
+  </script>
+
+  <main class="flex-grow">
+    <!-- ==================== قسم الترحيب (Hero Section) ==================== -->
+    <section id="home" class="relative py-12 md:py-16 lg:py-20">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+
+          <!-- العمود النصي -->
+          <div class="lg:col-span-7 text-center lg:text-right space-y-6">
+            
+            <!-- شارة الهوية الحرفية -->
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F2EAE0] border border-caramel/25 text-choco-800 text-xs sm:text-sm font-medium shadow-sm">
+              <span class="w-2 h-2 rounded-full bg-caramel"></span>
+              <span>مخبوزات وحلويات حرفية مُعدّة بشغف يومياً</span>
+            </div>
+
+            <!-- العنوان الرئيسي -->
+            <h1 class="text-3xl sm:text-5xl lg:text-6xl font-extrabold text-choco-900 leading-[1.3] lg:leading-[1.2] tracking-tight">
+              <span class="font-normal block text-xl sm:text-3xl text-choco-700 font-serif-arabic mb-2.5 italic">
+                صُنع فاخر بكل حب وإتقان..
+              </span>
+              نصنع لك لحظات تدوب بين <br class="hidden sm:inline">
+              أشهى <span class="text-caramel underline decoration-caramel/30 decoration-wavy decoration-2">الحلويات والمخبوزات</span>
+            </h1>
+
+            <!-- الوصف المختصر والدافئ -->
+            <p class="text-base sm:text-lg text-choco-700 leading-relaxed max-w-xl mx-auto lg:mx-0 font-normal">
+              في بوتيكنا، نحول الزبدة الطبيعية الفاخرة وأجود أنواع الشوكولاتة إلى قطع فنية تبهج حواسك؛ من التشيز كيك الغني بقوامه المخملي والدوناتس الهشة، إلى المخبوزات الحرفية الطازجة التي تفوح منها رائحة الدفء.
+            </p>
+
+            <!-- الأزرار الراقية -->
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-3.5 pt-2">
+              <!-- الزر الرئيسي -->
+              <a href="#menu" class="inline-flex items-center justify-center gap-3 bg-gradient-to-r from-caramel to-caramel-hover text-white px-8 py-3.5 rounded-xl font-bold text-base shadow-md shadow-caramel/20 hover:shadow-lg hover:shadow-caramel/30 hover:-translate-y-0.5 transition-all duration-300">
+                <span>اكتشف المنيو</span>
+                <i class="fa-solid fa-arrow-left text-xs"></i>
+              </a>
+
+              <!-- الزر الثانوي الأنيق -->
+              <a id="hero-whatsapp-btn" href="https://wa.me/201000000000" target="_blank" class="inline-flex items-center justify-center gap-2.5 bg-white/70 hover:bg-white text-choco-900 border border-[#231610]/15 hover:border-caramel px-7 py-3.5 rounded-xl font-semibold text-base shadow-sm hover:shadow hover:-translate-y-0.5 transition-all duration-300">
+                <i class="fa-brands fa-whatsapp text-lg text-emerald-600"></i>
+                <span>تواصل عبر واتساب</span>
+              </a>
+            </div>
+
+          </div>
+
+          <!-- العمود البصري (الصورة بإطار ناعم وظل دافئ مع لمسات بريق عائمة) -->
+          <div class="lg:col-span-5">
+            <div class="relative mx-auto max-w-md lg:max-w-none">
+              
+              <!-- هالة إضاءة خلفية دافئة وناعمة للصورة -->
+              <div class="absolute -inset-4 bg-gradient-to-tr from-caramel/25 via-amber-400/20 to-pink-300/20 rounded-[3rem] blur-2xl pointer-events-none"></div>
+
+              <!-- لمسة بريق عائمة 1: شارة صُنع يدوي فاخر الفخمة أعلى اليمين -->
+              <div class="absolute -top-3.5 -right-3 sm:-top-5 sm:-right-4 z-20 flex items-center gap-1.5 px-3 sm:px-3.5 py-1.5 rounded-2xl bg-white/90 backdrop-blur-md border border-white/90 shadow-lg shadow-caramel/20 animate-sparkle-1 pointer-events-none font-cairo">
+                <i class="fa-solid fa-fire-flame-curved text-caramel text-sm"></i>
+                <span class="text-xs font-black text-choco-950">إبداع بمذاق فاخر</span>
+              </div>
+
+              <!-- لمسة بريق عائمة 2: نجمة بريق ذهبية متلألئة أعلى اليسار -->
+              <div class="absolute top-10 -left-3.5 sm:top-14 sm:-left-5 z-20 w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-white/90 backdrop-blur-md border border-white/90 shadow-md shadow-caramel/20 flex items-center justify-center text-caramel animate-sparkle-2 pointer-events-none">
+                <i class="fa-solid fa-star text-amber-400 text-lg animate-twinkle"></i>
+              </div>
+
+              <!-- لمسة بريق عائمة 3: بريق ساحر عائم -->
+              <div class="absolute -top-5 left-1/3 z-20 pointer-events-none animate-twinkle-delay hidden sm:block">
+                <i class="fa-solid fa-wand-magic-sparkles text-caramel text-base"></i>
+              </div>
+
+              <!-- لمسة بريق عائمة 4: شارة زبدة طبيعية أسفل اليسار -->
+              <div class="absolute -bottom-3 -left-2 sm:-bottom-4 sm:-left-3 z-20 flex items-center gap-1.5 px-3 py-1.5 rounded-2xl bg-white/95 backdrop-blur-md border border-white/90 shadow-lg shadow-caramel/20 animate-sparkle-3 pointer-events-none font-cairo">
+                <i class="fa-solid fa-cubes-stacked text-amber-600 text-xs"></i>
+                <span class="text-[11px] sm:text-xs font-extrabold text-choco-950">١٠٠٪ زبدة طبيعية</span>
+              </div>
+
+              <!-- إطار الصورة الرئيسي الفخم -->
+              <div class="relative rounded-3xl lg:rounded-[2.5rem] overflow-hidden border-[6px] border-white/95 shadow-2xl shadow-amber-950/15 group">
+                <img 
+                  src="https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=1000&q=85" 
+                  alt="تشيز كيك سان سيباستيان وحلويات فاخرة طازجة" 
+                  class="w-full h-[380px] sm:h-[460px] lg:h-[490px] object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+                  loading="eager"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-choco-950/65 via-transparent to-transparent pointer-events-none"></div>
+
+                <div class="absolute bottom-4 right-4 left-4 p-3.5 rounded-2xl bg-white/90 backdrop-blur-md border border-white/60 shadow-sm flex items-center justify-between">
+                  <div class="text-right">
+                    <span class="text-[11px] font-bold text-caramel block mb-0.5">تخصص البوتيك الحرفي</span>
+                    <h3 class="font-bold text-sm text-choco-900">تشيز كيك سان سيباستيان بالكراميل</h3>
+                  </div>
+                  <span class="text-xs font-bold px-2.5 py-1 rounded-xl bg-cream-200/90 text-choco-800 flex items-center gap-1.5">
+                    <i class="fa-solid fa-heart text-caramel text-xs"></i>
+                    <span>مخبوز بحب</span>
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== قسم المنيو والمنتجات الحرفية (Artisanal Menu Section) ==================== -->
+    <section id="menu" class="scroll-mt-28 py-16 md:py-24 border-t border-[#231610]/10 bg-cream-50/40 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- رأس قسم المنيو -->
+        <div class="text-center max-w-2xl mx-auto mb-10 sm:mb-12 reveal-on-scroll">
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-choco-900 tracking-tight">
+            قائمتنا الحرفية
+          </h2>
+          <p class="mt-3 text-sm sm:text-base text-choco-700 leading-relaxed font-normal">
+            نخبز دفعات محدودة يومياً لضمان أعلى جودة وطزاجة تليق بذوقكم
+          </p>
+
+          <!-- شريط البحث السريع والفاخر في المنيو -->
+          <div class="relative max-w-md mx-auto mt-6 px-1">
+            <div class="relative flex items-center bg-white/90 backdrop-blur-md rounded-2xl border border-choco-900/15 shadow-xs hover:shadow-md focus-within:shadow-md focus-within:border-caramel focus-within:ring-2 focus-within:ring-caramel/20 transition-all duration-300">
+              <span class="pr-4 pl-2 text-caramel flex items-center pointer-events-none">
+                <i class="fa-solid fa-magnifying-glass text-sm"></i>
+              </span>
+              <input 
+                type="text" 
+                id="menu-search-input" 
+                oninput="handleMenuSearch(this.value)" 
+                placeholder="ابحث عن حلوياتك المفضلة (تشيز كيك، دوناتس، سينابون...)" 
+                class="w-full py-3 pr-1 pl-10 text-xs sm:text-sm font-semibold text-choco-950 placeholder:text-choco-400 bg-transparent focus:outline-none font-cairo"
+                autocomplete="off"
+              />
+              <button 
+                type="button" 
+                id="menu-search-clear" 
+                onclick="clearMenuSearch()" 
+                class="absolute left-3 p-1 rounded-full text-choco-400 hover:text-red-600 hover:bg-cream-100 transition-colors hidden cursor-pointer"
+                title="مسح البحث"
+              >
+                <i class="fa-solid fa-xmark text-xs"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- أزرار تبويبات الفلترة (تتولد تلقائياً من لوحة التحكم) -->
+          <div id="category-filters" class="flex items-center justify-center gap-2 sm:gap-3 flex-wrap mt-6">
+            <!-- يتم حقن أزرار الأقسام تلقائياً عبر JavaScript -->
+          </div>
+        </div>
+
+        <!-- شبكة عرض المنتجات: كارتين في الموبايل، و3 في الشاشات الكبيرة -->
+        <div id="products-grid" class="grid grid-cols-2 md:grid-cols-3 gap-3.5 sm:gap-6 lg:gap-8">
+          <!-- يتم رسم الكروت تلقائياً عبر JavaScript -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== قسم قصتنا (About Section) ==================== -->
+    <section id="about" class="py-16 md:py-24 border-t border-[#231610]/10 bg-[#FAF7F2]/60 relative overflow-hidden">
+      <!-- كرات إضاءة دافئة مموهة في الخلفية لعمق بصري فاخر -->
+      <div class="absolute -top-24 -right-24 w-80 h-80 sm:w-96 sm:h-96 rounded-full bg-gradient-to-br from-amber-400/20 via-caramel/15 to-transparent blur-[100px] pointer-events-none blob-animate-1" aria-hidden="true"></div>
+      <div class="absolute -bottom-24 -left-24 w-80 h-80 sm:w-96 sm:h-96 rounded-full bg-gradient-to-tr from-pink-300/15 via-caramel-light/20 to-transparent blur-[100px] pointer-events-none blob-animate-2" aria-hidden="true"></div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div class="grid lg:grid-cols-12 gap-8 lg:gap-10 items-center">
+          
+          <div class="lg:col-span-6 space-y-4 sm:space-y-5 text-center lg:text-right reveal-on-scroll h-auto min-h-0">
+            <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#F2EAE0] border border-caramel/25 text-choco-800 text-xs sm:text-sm font-semibold shadow-xs">
+              <i class="fa-solid fa-wand-magic-sparkles text-caramel text-xs"></i>
+              <span>أصالة وشغف الخبيز الحرفي</span>
+            </div>
+            <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-choco-950 tracking-tight leading-snug">
+              نصنع حلويات تفرح القلب من قلب أفراننا الحرفية
+            </h2>
+            <p class="text-sm sm:text-base text-[#5C4538] leading-relaxed h-auto min-h-0">
+              بدأت رحلتنا في "Bosy Sweet" من شغف حقيقي لتقديم حلويات ومخبوزات مصنوعة بحب ودقة تليق بذوقكم. نعتمد في بوتيكنا على الزبدة الطبيعية الفاخرة ١٠٠٪، والشوكولاتة البلجيكية النقية، ونمنح عجينتنا وقتاً كافياً للتخمير البطيء لأكثر من ٢٤ ساعة لضمان خفة وهشاشة لا تُقاوم.
+            </p>
+            
+            <!-- كروت أسرار الصنعة والمكونات الزجاجية التفاعلية -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-3 text-center h-auto min-h-0">
+              
+              <!-- كارت 1: زبدة طبيعية فاخرة -->
+              <div class="p-3.5 sm:p-4 rounded-3xl bg-white/85 backdrop-blur-xl border border-white/80 shadow-[0_8px_25px_rgb(0,0,0,0.03)] hover:shadow-xl hover:shadow-caramel/20 hover:border-caramel/40 hover:-translate-y-2 transition-all duration-300 flex flex-col items-center justify-center group cursor-default h-auto min-h-0">
+                <div class="w-12 h-12 rounded-full bg-gradient-to-br from-amber-100/90 to-amber-200/50 text-amber-700 flex items-center justify-center mb-2.5 shadow-2xs group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
+                  <i class="fa-solid fa-droplet text-caramel text-lg group-hover:text-caramel-hover transition-colors"></i>
+                </div>
+                <h4 class="font-extrabold text-xs sm:text-sm text-choco-950 mb-0.5 leading-snug">زبدة طبيعية</h4>
+                <p class="text-[11px] text-choco-600 font-medium leading-relaxed">١٠٠٪ بدون دهون مهدرجة</p>
+              </div>
+
+              <!-- كارت 2: تخمير بطيء 24 ساعة -->
+              <div class="p-3.5 sm:p-4 rounded-3xl bg-white/85 backdrop-blur-xl border border-white/80 shadow-[0_8px_25px_rgb(0,0,0,0.03)] hover:shadow-xl hover:shadow-caramel/20 hover:border-caramel/40 hover:-translate-y-2 transition-all duration-300 flex flex-col items-center justify-center group cursor-default h-auto min-h-0">
+                <div class="w-12 h-12 rounded-full bg-gradient-to-br from-amber-100/90 to-amber-200/50 text-amber-700 flex items-center justify-center mb-2.5 shadow-2xs group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
+                  <i class="fa-solid fa-hourglass-half text-caramel text-lg group-hover:text-caramel-hover transition-colors"></i>
+                </div>
+                <h4 class="font-extrabold text-xs sm:text-sm text-choco-950 mb-0.5 leading-snug">تخمير بطيء</h4>
+                <p class="text-[11px] text-choco-600 font-medium leading-relaxed">٢٤ ساعة قوام هش</p>
+              </div>
+
+              <!-- كارت 3: كاكاو بلجيكي نقي -->
+              <div class="p-3.5 sm:p-4 rounded-3xl bg-white/85 backdrop-blur-xl border border-white/80 shadow-[0_8px_25px_rgb(0,0,0,0.03)] hover:shadow-xl hover:shadow-caramel/20 hover:border-caramel/40 hover:-translate-y-2 transition-all duration-300 flex flex-col items-center justify-center group cursor-default h-auto min-h-0">
+                <div class="w-12 h-12 rounded-full bg-gradient-to-br from-amber-100/90 to-amber-200/50 text-amber-700 flex items-center justify-center mb-2.5 shadow-2xs group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
+                  <i class="fa-solid fa-cookie-bite text-caramel text-lg group-hover:text-caramel-hover transition-colors"></i>
+                </div>
+                <h4 class="font-extrabold text-xs sm:text-sm text-choco-950 mb-0.5 leading-snug">كاكاو بلجيكي</h4>
+                <p class="text-[11px] text-choco-600 font-medium leading-relaxed">شوكولاتة نقية وفاخرة</p>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- عمود الصورة بإطار دائري فاخر وظل دافئ -->
+          <div class="lg:col-span-6 reveal-on-scroll h-auto min-h-0">
+            <div class="relative mx-auto max-w-md lg:max-w-none">
+              <!-- هالة إضاءة خلفية دافئة وناعمة -->
+              <div class="absolute -inset-4 bg-gradient-to-tr from-caramel/25 via-amber-400/20 to-pink-300/20 rounded-[3rem] blur-2xl pointer-events-none"></div>
+
+              <div class="relative rounded-3xl lg:rounded-[2.5rem] overflow-hidden border-[6px] border-white/95 shadow-2xl shadow-amber-950/15 group aspect-[4/3] hover:-translate-y-1 transition-all duration-500">
+                <img 
+                  src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=800&q=80" 
+                  alt="مخبوزات طازجة يومية" 
+                  class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
+                  loading="lazy"
+                />
+                <div class="absolute inset-0 bg-gradient-to-t from-choco-950/70 via-transparent to-transparent flex items-end p-3.5 sm:p-6">
+                  <div class="bg-white/95 backdrop-blur-md px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-2xl border border-white/80 shadow-md flex items-center gap-2 sm:gap-2.5 font-cairo animate-badge-pulse h-auto min-h-0 max-w-full">
+                    <i class="fa-solid fa-heart text-caramel text-xs sm:text-sm animate-pulse flex-shrink-0"></i>
+                    <p class="text-choco-950 text-xs sm:text-sm font-bold leading-relaxed">
+                      كل قطعة تخبز وتزين بحب وعناية فائقة
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== قسم تواصل معنا والفوتر (Contact & Footer Section) ==================== -->
+    <section id="contact" class="scroll-mt-24 py-16 md:py-24 border-t border-[#231610]/10 bg-cream-50/70 relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- رأس القسم والشارة الحية لمواعيد العمل -->
+        <div class="text-center max-w-2xl mx-auto mb-10 reveal-on-scroll">
+          
+          <!-- شارة حية تفاعلية لمواعيد العمل -->
+          <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-2xl bg-emerald-50/90 border border-emerald-200 text-emerald-800 text-xs sm:text-sm font-bold shadow-xs mx-auto mb-5 font-cairo">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span>مفتوح الآن ويستقبل طلباتكم</span>
+            <span class="text-emerald-300">|</span>
+            <i class="fa-regular fa-clock text-emerald-600"></i>
+            <span id="working-hours-badge-text">يومياً: ٩:٠٠ ص - ١١:٠٠ م</span>
+          </div>
+
+          <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-choco-950 tracking-tight leading-tight">
+            تواصل معنا وشاركنا حلاوة اللحظة
+          </h2>
+          <p class="mt-2.5 text-sm sm:text-base text-[#5C4538] leading-relaxed">
+            جاهزون لاستقبال طلباتكم الفورية والتوصيل السريع لباب بيتك
+          </p>
+        </div>
+
+        <!-- كروت التواصل السريعة الزجاجية الفاخرة -->
+        <div class="grid sm:grid-cols-2 gap-4 max-w-2xl mx-auto mb-10 text-center reveal-on-scroll">
+          
+          <!-- كارت أوقات العمل -->
+          <div class="p-6 rounded-3xl bg-white/80 backdrop-blur-md border border-white/80 shadow-[0_8px_25px_rgb(0,0,0,0.03)] hover:shadow-xl hover:border-caramel/30 hover:-translate-y-1.5 transition-all duration-300 group cursor-default">
+            <div class="w-12 h-12 rounded-2xl bg-amber-100/90 text-caramel flex items-center justify-center mx-auto mb-3 shadow-2xs group-hover:scale-110 group-hover:rotate-6 transition-all duration-300">
+              <i class="fa-solid fa-clock text-lg"></i>
+            </div>
+            <h4 class="font-extrabold text-sm sm:text-base text-choco-950 mb-1">مواعيد العمل اليومية</h4>
+            <p id="working-hours-display" class="text-xs sm:text-sm text-[#5C4538] font-bold">يومياً: ٩:٠٠ ص - ١١:٠٠ م</p>
+          </div>
+
+          <!-- كارت خدمة العملاء والواتساب مع التوهج الأخضر التفاعلي -->
+          <div class="p-6 rounded-3xl bg-white/80 backdrop-blur-md border border-white/80 shadow-[0_8px_25px_rgb(0,0,0,0.03)] hover:shadow-xl hover:shadow-emerald-500/10 hover:border-emerald-300/60 hover:-translate-y-1.5 transition-all duration-300 group">
+            <div class="w-12 h-12 rounded-2xl bg-emerald-100/90 text-emerald-600 flex items-center justify-center mx-auto mb-3 shadow-2xs group-hover:scale-110 group-hover:bg-emerald-500 group-hover:text-white group-hover:shadow-[0_0_25px_rgba(16,185,129,0.5)] transition-all duration-300">
+              <i class="fa-brands fa-whatsapp text-2xl"></i>
+            </div>
+            <h4 class="font-extrabold text-sm sm:text-base text-choco-950 mb-1">خدمة العملاء والطلبات</h4>
+            <a id="contact-whatsapp-btn" href="https://wa.me/201068617307" target="_blank" class="inline-flex items-center gap-1.5 text-xs sm:text-sm text-emerald-700 font-extrabold group-hover:text-emerald-600 group-hover:drop-shadow-[0_0_8px_rgba(16,185,129,0.45)] transition-all duration-300">
+              <span id="contact-whatsapp-display">01068617307</span>
+              <i class="fa-solid fa-arrow-left text-[11px] group-hover:-translate-x-1 transition-transform"></i>
+            </a>
+          </div>
+
+        </div>
+
+        <!-- كارت حجز تورت ومخبوزات المناسبات الخاصة الفاخر مع حلقة التوهج النبضية -->
+        <div class="relative overflow-hidden rounded-3xl p-6 sm:p-9 bg-gradient-to-br from-[#1f130d] via-[#351e13] to-[#160c07] text-white shadow-2xl max-w-4xl mx-auto mb-14 border border-amber-500/30 font-cairo reveal-on-scroll">
+          <div class="absolute -right-12 -bottom-12 w-56 h-56 rounded-full bg-amber-500/20 blur-3xl pointer-events-none"></div>
+          <div class="absolute -left-12 -top-12 w-56 h-56 rounded-full bg-caramel/20 blur-3xl pointer-events-none"></div>
+          <div class="flex flex-col md:flex-row items-center justify-between gap-6 relative z-10 text-center md:text-right">
+            <div class="space-y-2">
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-xl bg-caramel/25 border border-amber-400/40 text-amber-300 text-xs font-bold">
+                <i class="fa-solid fa-cake-candles"></i>
+                <span>تورت ومناسبات خاصة</span>
+              </div>
+              <h3 class="text-xl sm:text-2xl font-black text-white leading-tight">
+                عندك مناسبة سعيدة أو احتفال خاص؟
+              </h3>
+              <p class="text-xs sm:text-sm text-cream-200/80 max-w-xl leading-relaxed">
+                نصمم لك تورت مخصصة وبوفيهات حلويات ومخبوزات فاخرة تناسب كافة مناسباتكم السعيدة بتفاصيل فخمة وطعم استثنائي نخبزه لك خصيصاً.
+              </p>
+            </div>
+            <a id="custom-events-wa-btn" href="https://wa.me/201068617307" target="_blank" class="inline-flex items-center justify-center gap-2.5 bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-extrabold text-sm px-6 py-3.5 rounded-2xl shadow-lg hover:-translate-y-0.5 active:translate-y-0 transition-all whitespace-nowrap cursor-pointer btn-pulse-glow">
+              <i class="fa-brands fa-whatsapp text-lg"></i>
+              <span>حجز وتفصيل مناسبة خاصة</span>
+            </a>
+          </div>
+        </div>
+
+        <!-- الفوتر الراقي: لوجو يطفو بانسيابية وروابط وشبكات تواصل ملونة وحقوق -->
+        <footer class="pt-8 border-t border-[#231610]/10 flex flex-col items-center justify-center text-center space-y-6 reveal-on-scroll">
+          
+          <!-- اللوجو والهوية بحركة طفو انسيابية -->
+          <div class="flex flex-col items-center justify-center gap-2">
+            <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-full overflow-hidden border-2 border-caramel/40 shadow-md bg-[#FEF6EB] p-0.5 animate-float-slow">
+              <img src="mascot_avatar_v2.png" alt="شعار بوسي سويت" class="w-full h-full object-cover rounded-full" />
+            </div>
+            <span class="font-brand-ar text-2xl font-bold text-choco-950">
+              بوسي <span class="text-caramel">سويت</span>
+            </span>
+            <p class="text-xs text-choco-600 max-w-md font-cairo leading-relaxed">
+              حلويات ومخبوزات حرفية فاخرة تُصنع بشغف وأجود المكونات الطبيعية يومياً لتسعد كل أوقاتكم.
+            </p>
+          </div>
+
+          <!-- روابط سريعة -->
+          <nav class="flex items-center justify-center gap-6 sm:gap-8 text-xs sm:text-sm font-bold text-choco-800 flex-wrap">
+            <a href="#home" class="hover:text-caramel transition-colors">الرئيسية</a>
+            <a href="#menu" class="hover:text-caramel transition-colors">قائمتنا الحرفية</a>
+            <a href="#about" class="hover:text-caramel transition-colors">قصتنا وشغفنا</a>
+            <a href="#contact" class="hover:text-caramel transition-colors">تواصل معنا</a>
+          </nav>
+
+          <!-- أيقونات شبكات التواصل الاجتماعي بألوانها الحقيقية النابضة -->
+          <div class="flex items-center justify-center gap-3">
+            <a id="footer-instagram-link" href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-2xl bg-white border border-[#231610]/10 text-choco-800 hover:text-white hover:border-transparent hover:bg-gradient-to-tr hover:from-[#f09433] hover:via-[#dc2743] hover:to-[#bc1888] hover:shadow-[0_8px_20px_rgba(220,39,67,0.35)] flex items-center justify-center shadow-xs hover:-translate-y-1.5 active:translate-y-0 transition-all duration-300" title="Instagram">
+              <i class="fa-brands fa-instagram text-base"></i>
+            </a>
+            <a id="footer-facebook-link" href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-2xl bg-white border border-[#231610]/10 text-choco-800 hover:text-white hover:border-transparent hover:bg-[#1877F2] hover:shadow-[0_8px_20px_rgba(24,119,242,0.35)] flex items-center justify-center shadow-xs hover:-translate-y-1.5 active:translate-y-0 transition-all duration-300" title="Facebook">
+              <i class="fa-brands fa-facebook-f text-sm"></i>
+            </a>
+            <a id="footer-tiktok-link" href="https://tiktok.com" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-2xl bg-white border border-[#231610]/10 text-choco-800 hover:text-white hover:border-black hover:bg-black hover:shadow-[0_8px_20px_rgba(0,0,0,0.4)] hover:drop-shadow-[0_0_8px_rgba(0,242,234,0.6)] flex items-center justify-center shadow-xs hover:-translate-y-1.5 active:translate-y-0 transition-all duration-300" title="TikTok">
+              <i class="fa-brands fa-tiktok text-sm"></i>
+            </a>
+            <a id="footer-whatsapp-link" href="https://wa.me/201068617307" target="_blank" rel="noopener noreferrer" class="w-10 h-10 rounded-2xl bg-white border border-[#231610]/10 text-choco-800 hover:text-white hover:border-transparent hover:bg-[#25D366] hover:shadow-[0_8px_20px_rgba(37,211,102,0.4)] flex items-center justify-center shadow-xs hover:-translate-y-1.5 active:translate-y-0 transition-all duration-300" title="WhatsApp">
+              <i class="fa-brands fa-whatsapp text-base"></i>
+            </a>
+          </div>
+
+          <!-- حقوق النشر -->
+          <div class="text-xs text-choco-500 pt-3 border-t border-[#231610]/5 w-full">
+            <p id="copyright-text" class="cursor-default select-none">© 2026 بوسي سويت (Bosy Sweet) للحلويات والمخبوزات. جميع الحقوق محفوظة.</p>
+          </div>
+        </footer>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- ==================== شريط السلة العائم السريع (Floating Bottom Checkout Bar) ==================== -->
+  <div 
+    id="floating-cart-bar" 
+    onclick="toggleCart(true)"
+    class="fixed bottom-4 inset-x-3 sm:inset-x-auto sm:right-6 max-w-md mx-auto sm:w-auto z-40 transform transition-all duration-300 ease-out translate-y-20 opacity-0 pointer-events-none cursor-pointer group select-none"
+  >
+    <div class="bg-choco-950/95 hover:bg-choco-900/95 backdrop-blur-md text-white px-3.5 sm:px-5 py-2.5 sm:py-3 rounded-2xl shadow-2xl flex items-center justify-between gap-3 sm:gap-6 border border-white/10 hover:border-caramel/40 transition-all font-cairo">
+      <div class="flex items-center gap-2.5">
+        <div class="relative w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-gradient-to-tr from-caramel to-caramel-hover text-white flex items-center justify-center text-xs sm:text-sm shadow-md shadow-caramel/30 flex-shrink-0 group-hover:scale-105 transition-transform">
+          <i class="fa-solid fa-basket-shopping"></i>
+          <span id="floating-cart-badge" class="absolute -top-1.5 -right-1.5 bg-white text-choco-950 text-[10px] font-black w-4 h-4 rounded-full flex items-center justify-center shadow-xs">٠</span>
+        </div>
+        <div class="flex items-center gap-1.5 text-xs sm:text-sm font-extrabold text-white whitespace-nowrap">
+          <span id="floating-cart-qty">٠ أصناف</span>
+          <span class="text-caramel font-black">•</span>
+          <span id="floating-cart-subtotal" class="text-amber-400 font-black">٠ ج.م</span>
+        </div>
+      </div>
+      <div class="flex items-center gap-1.5 bg-caramel hover:bg-caramel-hover text-white text-xs sm:text-sm font-bold px-3 sm:px-4 py-2 rounded-xl border border-white/15 transition-all flex-shrink-0 shadow-xs whitespace-nowrap">
+        <span>إتمام الطلب</span>
+        <i class="fa-solid fa-arrow-left text-[10px] sm:text-xs group-hover:-translate-x-1 transition-transform"></i>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== إشعار التوست السريع (Toast Notification) ==================== -->
+  <div id="toast" class="fixed bottom-20 sm:bottom-6 left-1/2 -translate-x-1/2 z-50 transform transition-all duration-300 pointer-events-none opacity-0 translate-y-4 max-w-sm w-[90%] sm:w-auto">
+    <div class="bg-choco-950/95 backdrop-blur-md text-white text-xs sm:text-sm font-semibold py-3 px-5 rounded-2xl shadow-2xl flex items-center gap-3 border border-white/10">
+      <div class="w-7 h-7 rounded-xl bg-caramel/20 flex items-center justify-center text-caramel flex-shrink-0">
+        <i class="fa-solid fa-check"></i>
+      </div>
+      <span id="toast-message">تمت إضافة الصنف للسلة بنجاح</span>
+    </div>
+  </div>
+
+  <!-- ==================== القائمة الجانبية للسلة بتصميم راقي وفخم (Cart Drawer) ==================== -->
+  <!-- خلفية معتمة بضبابية زجاجية -->
+  <div id="cart-backdrop" onclick="toggleCart(false)" class="fixed inset-0 bg-choco-950/45 backdrop-blur-sm z-50 transition-opacity duration-300 opacity-0 pointer-events-none"></div>
+
+  <!-- الدرج الجانبي للسلة -->
+  <aside id="cart-drawer" class="fixed top-0 right-0 h-full w-full sm:w-[440px] bg-[#FAF7F2] z-50 shadow-2xl flex flex-col justify-between transition-transform duration-300 ease-out translate-x-full border-l border-[#231610]/10 font-cairo">
+    
+    <!-- رأس السلة -->
+    <div class="p-5 sm:p-6 border-b border-[#231610]/10 flex items-center justify-between bg-white/80">
+      <div class="flex items-center gap-3">
+        <div class="w-11 h-11 rounded-full overflow-hidden border border-caramel/30 bg-[#FEF6EB] p-0.5 shadow-xs flex-shrink-0">
+          <img src="mascot_avatar_v2.png" alt="Bosy Sweet" class="w-full h-full object-cover rounded-full" />
+        </div>
+        <div>
+          <h3 class="font-extrabold text-base sm:text-lg text-choco-950 tracking-tight">سلة المشتريات</h3>
+          <span id="drawer-items-count" class="text-xs text-choco-600 font-semibold">٠ أصناف</span>
+        </div>
+      </div>
+      <button type="button" onclick="toggleCart(false)" aria-label="إغلاق السلة" class="w-9 h-9 rounded-xl bg-cream-200/80 hover:bg-cream-200 text-choco-700 flex items-center justify-center transition-colors cursor-pointer">
+        <i class="fa-solid fa-xmark text-base"></i>
+      </button>
+    </div>
+
+    <!-- محتوى السلة (قائمة الأصناف المحسنة بدون أي ضغط أو تشويه) -->
+    <div id="cart-items-container" class="flex-grow overflow-y-auto p-4 sm:p-6 space-y-3.5">
+      <!-- يتم حقن الأصناف أو Empty State هنا عبر JavaScript -->
+    </div>
+
+    <!-- أسفل السلة (الإجمالي وزر إتمام الطلب مع رسوم التوصيل والحد الأدنى للطلب) -->
+    <div id="cart-footer" class="p-5 sm:p-6 border-t border-[#231610]/10 bg-white shadow-lg space-y-3.5 font-cairo">
+      
+      <!-- شريط تنبيه الحد الأدنى للطلب -->
+      <div id="min-order-alert" class="hidden rounded-2xl p-3 text-xs font-bold transition-all flex items-start gap-2.5 border">
+        <i id="min-order-icon" class="fa-solid fa-triangle-exclamation mt-0.5 text-sm flex-shrink-0"></i>
+        <div id="min-order-msg" class="leading-relaxed flex-1"></div>
+      </div>
+
+      <div class="space-y-2 border-b border-[#231610]/5 pb-3 text-xs sm:text-sm">
+        <div class="flex items-center justify-between text-choco-700">
+          <span>مجموع المنتجات:</span>
+          <span id="cart-subtotal-price" class="font-bold text-choco-900">٠ ج.م</span>
+        </div>
+        <div class="flex items-center justify-between text-choco-700">
+          <span>رسوم التوصيل:</span>
+          <span id="cart-delivery-fee" class="font-bold text-emerald-700">٤٠ ج.م</span>
+        </div>
+      </div>
+      <div class="flex items-center justify-between text-base">
+        <span class="text-choco-950 font-extrabold text-sm sm:text-base">المجموع الإجمالي المطلوب:</span>
+        <span id="cart-total-price" class="text-xl sm:text-2xl font-black text-caramel">٠ ج.م</span>
+      </div>
+      <button 
+        id="checkout-btn"
+        type="button" 
+        onclick="openCheckoutModal()" 
+        class="w-full inline-flex items-center justify-center gap-3 bg-gradient-to-r from-caramel to-caramel-hover hover:from-caramel-hover hover:to-[#915622] text-white py-4 rounded-2xl font-extrabold text-base shadow-lg shadow-caramel/25 hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 transition-all cursor-pointer font-cairo"
+      >
+        <i class="fa-brands fa-whatsapp text-xl"></i>
+        <span>إتمام الطلب عبر واتساب</span>
+      </button>
+    </div>
+
+  </aside>
+
+  <!-- ==================== نافذة اختيار النكهة الزجاجية الفاخرة (Flavor Selection Modal) ==================== -->
+  <div id="flavor-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 transition-all duration-300 opacity-0 pointer-events-none font-cairo">
+    <div onclick="closeFlavorModal()" class="absolute inset-0 bg-choco-950/50 backdrop-blur-sm"></div>
+
+    <div class="relative bg-[#FAF7F2] rounded-3xl max-w-md w-full p-4 sm:p-6 shadow-2xl border border-[#231610]/10 transform transition-all duration-300 scale-95 max-h-[90vh] overflow-y-auto">
+      
+      <!-- هيدر النافذة -->
+      <div class="flex items-center justify-between pb-3.5 border-b border-[#231610]/10 mb-4">
+        <div class="flex items-center gap-2.5">
+          <div class="w-9 h-9 rounded-xl bg-amber-100/90 text-amber-700 flex items-center justify-center text-sm shadow-2xs">
+            <i class="fa-solid fa-cookie-bite text-caramel"></i>
+          </div>
+          <div>
+            <h3 class="font-extrabold text-base text-choco-950">اختر نكهتك المفضلة</h3>
+            <p class="text-[11px] text-choco-600 font-medium">مخبوزة ومحضرة طازجة خصيصاً لك</p>
+          </div>
+        </div>
+        <button type="button" onclick="closeFlavorModal()" class="w-8 h-8 rounded-xl bg-cream-200 text-choco-700 flex items-center justify-center hover:bg-cream-300 transition-colors cursor-pointer" title="إغلاق">
+          <i class="fa-solid fa-xmark text-sm"></i>
+        </button>
+      </div>
+
+      <!-- كارت تفاصيل الصنف -->
+      <div class="flex items-center gap-3.5 p-3 rounded-2xl bg-white border border-[#231610]/10 shadow-xs mb-4">
+        <img id="flavor-modal-img" src="" alt="صورة الصنف" class="w-16 h-16 rounded-xl object-cover border border-[#231610]/10 shadow-2xs flex-shrink-0" />
+        <div class="min-w-0 flex-grow">
+          <h4 id="flavor-modal-name" class="font-extrabold text-sm sm:text-base text-choco-950 truncate">اسم الصنف</h4>
+          <div class="flex items-center gap-2 mt-1">
+            <span id="flavor-modal-price" class="text-sm font-black text-caramel">٠ ج.م</span>
+            <span id="flavor-modal-size-tag" class="hidden text-[10px] font-bold bg-blue-50 text-blue-800 px-2 py-0.5 rounded-md border border-blue-200/60"></span>
+            <span id="flavor-modal-weight-tag" class="hidden text-[10px] font-bold bg-amber-50 text-amber-800 px-2 py-0.5 rounded-md border border-amber-200/60"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- خيارات النكهات المتاحة كبسولات دائرية فخمة (Radio Pills) -->
+      <div class="mb-5">
+        <label class="block text-xs font-bold text-choco-900 mb-2.5 flex items-center justify-between">
+          <span class="flex items-center gap-1.5">
+            <i class="fa-solid fa-wand-magic-sparkles text-caramel text-xs"></i>
+            <span>النكهات المتاحة:</span>
+          </span>
+          <span class="text-[10px] text-choco-500 font-normal">اضغط لاختيار النكهة</span>
+        </label>
+        <div id="flavor-pills-container" class="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-2.5">
+          <!-- يتم حقن كبسولات النكهات ديناميكياً -->
+        </div>
+      </div>
+
+      <!-- عداد الكمية وزر الإضافة للسلة -->
+      <div class="pt-3 border-t border-[#231610]/10 space-y-3">
+        <div class="flex items-center justify-between bg-white p-2.5 rounded-2xl border border-[#231610]/10 shadow-xs">
+          <span class="text-xs font-bold text-choco-900">الكمية المطلوبة:</span>
+          <div class="flex items-center bg-[#F2EAE0] rounded-xl p-1 border border-[#231610]/10">
+            <button type="button" onclick="adjustFlavorQty(-1)" class="w-8 h-8 rounded-lg bg-white hover:bg-cream-100 text-choco-900 flex items-center justify-center text-xs font-bold shadow-xs active:scale-95 transition-all cursor-pointer" title="تقليل">
+              <i class="fa-solid fa-minus text-[10px]"></i>
+            </button>
+            <span id="flavor-modal-qty" class="text-sm font-bold text-choco-950 min-w-[36px] text-center">١</span>
+            <button type="button" onclick="adjustFlavorQty(1)" class="w-8 h-8 rounded-lg bg-white hover:bg-cream-100 text-choco-900 flex items-center justify-center text-xs font-bold shadow-xs active:scale-95 transition-all cursor-pointer" title="زيادة">
+              <i class="fa-solid fa-plus text-[10px]"></i>
+            </button>
+          </div>
+        </div>
+
+        <button 
+          type="button" 
+          id="flavor-modal-submit-btn" 
+          onclick="confirmFlavorAddToCart()" 
+          class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-caramel to-caramel-hover hover:from-caramel-hover hover:to-[#915622] text-white font-extrabold text-sm flex items-center justify-center gap-2 shadow-lg shadow-caramel/25 hover:shadow-xl transition-all active:scale-[0.98] cursor-pointer"
+        >
+          <i class="fa-solid fa-bag-shopping text-base"></i>
+          <span>أضف للسلة بالنكهة المختارة</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ==================== نافذة تأكيد الطلب (Checkout Modal) ==================== -->
+  <div id="checkout-modal" class="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 transition-all duration-300 opacity-0 pointer-events-none font-cairo">
+    <div onclick="closeCheckoutModal()" class="absolute inset-0 bg-choco-950/50 backdrop-blur-sm"></div>
+
+    <div class="relative bg-[#FAF7F2] rounded-3xl max-w-lg w-full p-4 sm:p-8 shadow-2xl border border-[#231610]/10 transform transition-all duration-300 scale-95 max-h-[90vh] overflow-y-auto">
+      
+      <!-- هيدر النافذة -->
+      <div class="flex items-center justify-between pb-4 border-b border-[#231610]/10 mb-4">
+        <div class="flex items-center gap-3">
+          <div class="w-11 h-11 rounded-full overflow-hidden border border-caramel/30 bg-[#FEF6EB] p-0.5 shadow-xs flex-shrink-0">
+            <img src="mascot_avatar_v2.png" alt="Bosy Sweet" class="w-full h-full object-cover rounded-full" />
+          </div>
+          <div>
+            <h3 class="font-extrabold text-base sm:text-lg text-choco-900">بيانات التوصيل والتأكيد</h3>
+            <p class="text-xs text-choco-600">لنصلك بحلوياتك طازجة وفي أسرع وقت</p>
+          </div>
+        </div>
+        <button type="button" onclick="closeCheckoutModal()" class="w-8 h-8 rounded-xl bg-cream-200 text-choco-700 flex items-center justify-center hover:bg-cream-300 transition-colors cursor-pointer">
+          <i class="fa-solid fa-xmark text-sm"></i>
+        </button>
+      </div>
+
+      <!-- بادج رقم الطلب المقترح -->
+      <div class="flex items-center justify-between bg-cream-200/70 px-4 py-2.5 rounded-2xl border border-caramel/25 mb-4">
+        <div class="flex items-center gap-2">
+          <span class="text-xs text-choco-800 font-bold">رقم الطلب:</span>
+          <span id="modal-order-id" class="text-xs font-black text-caramel bg-white px-2.5 py-1 rounded-lg border border-caramel/30 tracking-wider">#BS-0000</span>
+        </div>
+        <span class="text-[11px] text-choco-600 font-medium">تأكيد مباشر عبر واتساب</span>
+      </div>
+
+      <!-- نموذج البيانات -->
+      <form id="checkout-form" onsubmit="handleCheckoutSubmit(event)" class="space-y-4">
+        <div>
+          <label class="block text-xs font-bold text-choco-800 mb-1.5">الاسم بالكامل *</label>
+          <input 
+            type="text" 
+            id="cust-name" 
+            required 
+            placeholder="مثال: أحمد محمود" 
+            class="w-full px-4 py-3 rounded-xl bg-white border border-[#231610]/15 text-sm text-choco-900 placeholder:text-choco-400 focus:outline-none focus:border-caramel focus:ring-2 focus:ring-caramel/20 transition-all font-cairo"
+          />
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-choco-800 mb-1.5">رقم الهاتف للتواصل *</label>
+          <input 
+            type="tel" 
+            id="cust-phone" 
+            required 
+            placeholder="مثال: 01012345678" 
+            dir="ltr"
+            class="w-full px-4 py-3 rounded-xl bg-white border border-[#231610]/15 text-sm text-choco-900 placeholder:text-choco-400 focus:outline-none focus:border-caramel focus:ring-2 focus:ring-caramel/20 transition-all text-right font-cairo"
+          />
+          <p id="phone-error" class="hidden text-xs text-red-600 font-bold mt-1.5 flex items-center gap-1.5">
+            <i class="fa-solid fa-circle-exclamation text-[11px]"></i>
+            <span>يرجى إدخال رقم هاتف مصري صحيح (11 رقم يبدأ بـ 010 أو 011 أو 012 أو 015)</span>
+          </p>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-choco-800 mb-1.5">العنوان بالتفصيل وملاحظات التوصيل *</label>
+          <textarea 
+            id="cust-address" 
+            required 
+            rows="3" 
+            placeholder="المنطقة، الشارع، رقم العمارة، الشقة، وأي تعليمات خاصة بالتسليم..." 
+            class="w-full px-4 py-3 rounded-xl bg-white border border-[#231610]/15 text-sm text-choco-900 placeholder:text-choco-400 focus:outline-none focus:border-caramel focus:ring-2 focus:ring-caramel/20 transition-all resize-none"
+          ></textarea>
+        </div>
+
+        <!-- ملخص الحساب الصغير شامل رسوم التوصيل 40 ج.م -->
+        <div class="bg-white/90 p-4 rounded-2xl border border-[#231610]/10 space-y-2 text-xs sm:text-sm font-cairo">
+          <div class="flex items-center justify-between text-choco-700">
+            <span>إجمالي المنتجات:</span>
+            <span id="modal-subtotal-price" class="font-bold text-choco-900">٠ ج.م</span>
+          </div>
+          <div class="flex items-center justify-between text-choco-700">
+            <span>رسوم التوصيل:</span>
+            <span id="modal-delivery-fee" class="font-bold text-emerald-700">٤٠ ج.م</span>
+          </div>
+          <div class="flex items-center justify-between pt-2 border-t border-[#231610]/10 text-choco-950 font-black text-sm sm:text-base">
+            <span>الإجمالي الكلي للدفع:</span>
+            <span id="modal-total-price" class="text-caramel font-black text-base sm:text-lg">٠ ج.م</span>
+          </div>
+        </div>
+
+        <button 
+          type="submit" 
+          class="w-full inline-flex items-center justify-center gap-2.5 bg-emerald-600 hover:bg-emerald-700 text-white py-3.5 rounded-xl font-bold text-sm sm:text-base shadow-md hover:shadow-lg transition-all duration-300 cursor-pointer"
+        >
+          <i class="fa-brands fa-whatsapp text-lg"></i>
+          <span>إرسال وتأكيد الطلب عبر واتساب</span>
+        </button>
+      </form>
+
+    </div>
+  </div>
+
+  <!-- ==================== بيانات المنتجات والسكربتات التفاعلية ==================== -->
+  <script>
+    // ==================== إعدادات وتهيئة Firebase Firestore السحابية ====================
+    const firebaseConfig = {
+      apiKey: "AIzaSyBvXsexfXd1_izTxfxoN0-lonf0AU8jnns",
+      authDomain: "bosy-sweet.firebaseapp.com",
+      projectId: "bosy-sweet",
+      storageBucket: "bosy-sweet.firebasestorage.app",
+      messagingSenderId: "738174238531",
+      appId: "1:738174238531:web:cb3fed852699e85a4af9f6"
+    };
+
+    let db = null;
+    try {
+      if (typeof firebase !== 'undefined') {
+        if (!firebase.apps.length) {
+          firebase.initializeApp(firebaseConfig);
+        }
+        db = firebase.firestore();
+      }
+    } catch (e) {
+      console.warn("Firebase initialization notice:", e);
+    }
+
+    // 1. مفاتيح التخزين الموحدة بين المتجر ولوحة الإدارة
+    const KEYS = {
+      PRODUCTS: 'bosy_sweet_products_v1',
+      CATEGORIES: 'bosy_sweet_categories_v1',
+      ORDERS: 'bosy_sweet_orders_v1',
+      SETTINGS: 'bosy_sweet_settings_v1',
+      CART: 'bosy_sweet_cart_v1'
+    };
+
+    // 2. البيانات الافتراضية التأسيسية للبوتيك
+    const DEFAULT_PRODUCTS = [
+      {
+        id: 1,
+        name: "تشيز كيك سان سيباستيان",
+        category: "cheesecake",
+        priceNum: 120,
+        priceText: "١٢٠ ج.م",
+        description: "كريمي وناعم من الداخل مع طبقة كراميل محروقة مكرملة بالزبدة الطبيعية الفاخرة.",
+        image: "https://images.unsplash.com/photo-1533134242443-d4fd215305ad?auto=format&fit=crop&w=800&q=80",
+        badge: "توقيع الشيف",
+        isAvailable: true
+      },
+      {
+        id: 2,
+        name: "تشيز كيك بوسي سويت الفاخر",
+        category: "cheesecake",
+        priceNum: 60,
+        priceText: "يبدأ من ٦٠ ج.م",
+        description: "تشيز كيك بارد مخملي مع تشكيلة من صوصات النكهات الغنية المحضرة يدوياً.",
+        image: "https://images.unsplash.com/photo-1565958011703-44f9829ba187?auto=format&fit=crop&w=800&q=80",
+        badge: "الأكثر طلباً",
+        flavors: [
+          { name: "شوكولاتة", price: 60 },
+          { name: "كراميل", price: 60 },
+          { name: "بيستاشيو", price: 70 },
+          { name: "بلوبيري", price: 70 }
+        ],
+        variants: [
+          { name: "شوكولاتة", price: 60 },
+          { name: "كراميل", price: 60 },
+          { name: "بيستاشيو", price: 70 },
+          { name: "بلوبيري", price: 70 }
+        ],
+        isAvailable: true
+      },
+      {
+        id: 3,
+        name: "دوناتس بريوش حرفية",
+        category: "donuts",
+        priceNum: 40,
+        priceText: "يبدأ من ٤٠ ج.م",
+        description: "عجينة بريوش مخمرة 24 ساعة، هشة وخفيفة مع حشوات وتغليفات غنية ومميزة.",
+        image: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=800&q=80",
+        badge: "الأكثر طلباً",
+        flavors: [
+          { name: "كريمة شانتيه", price: 40 },
+          { name: "شوكولاتة", price: 50 },
+          { name: "باستري", price: 50 },
+          { name: "بيستاشيو", price: 60 }
+        ],
+        variants: [
+          { name: "كريمة شانتيه", price: 40 },
+          { name: "شوكولاتة", price: 50 },
+          { name: "باستري", price: 50 },
+          { name: "بيستاشيو", price: 60 }
+        ],
+        isAvailable: true
+      },
+      {
+        id: 4,
+        name: "سينابون رول فاخر",
+        category: "bakery",
+        priceNum: 65,
+        priceText: "يبدأ من ٦٥ ج.م",
+        description: "عجينة السينابون الطرية بالقرفة الفاخرة مغطاة بأشهى الصوصات الخاصة.",
+        image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=800&q=80",
+        badge: "طازج وساخن",
+        flavors: [
+          { name: "صوص أبيض كلاسيك", price: 65 },
+          { name: "نوتيلا", price: 65 },
+          { name: "بيستاشيو", price: 75 }
+        ],
+        variants: [
+          { name: "صوص أبيض كلاسيك", price: 65 },
+          { name: "نوتيلا", price: 65 },
+          { name: "بيستاشيو", price: 75 }
+        ],
+        isAvailable: true
+      },
+      {
+        id: 5,
+        name: "بيتزا إيطالية حرفية",
+        category: "bakery",
+        pricingType: "sizes",
+        sizes: [
+          { name: "وسط", price: 220 },
+          { name: "كبير", price: 270 }
+        ],
+        variants: [
+          { name: "وسط", price: 220 },
+          { name: "كبير", price: 270 }
+        ],
+        priceNum: 220,
+        priceText: "يبدأ من ٢٢٠ ج.م",
+        description: "عجينة إيطالية مخمرة ببطء مع صلصة الطماطم الطبيعية وجبنة الموزاريلا الفاخرة.",
+        image: "https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=800&q=80",
+        badge: "أحجام ومقاسات",
+        isAvailable: true
+      },
+      {
+        id: 6,
+        name: "كرواسون الزبدة الفرنسية",
+        category: "bakery",
+        priceNum: 55,
+        priceText: "٥٥ ج.م",
+        description: "مورق وخفيف بعدد 27 طبقة من الزبدة النيوزيلندية الفاخرة، مقرمش وهش.",
+        image: "https://images.unsplash.com/photo-1555507036-ab1f4038808a?auto=format&fit=crop&w=800&q=80",
+        badge: "خبيز الصباح",
+        isAvailable: true
+      },
+      {
+        id: 7,
+        name: "بسبوسة فاخرة بالمكسرات",
+        category: "bakery",
+        pricingType: "kilo",
+        priceNum: 240,
+        quarterPrice: 60,
+        halfPrice: 120,
+        priceText: "٢٤٠ ج.م / كجم",
+        description: "مرملة وطرية بالسمن البلدي الطبيعي، محلاة بشربات خفيف ومزينة بحبات اللوز والبندق المحمص.",
+        image: "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=800&q=80",
+        badge: "بالكيلو",
+        isAvailable: true
+      },
+      {
+        id: 8,
+        name: "تورتة الريد فيلفيت الملكية",
+        category: "cheesecake",
+        pricingType: "sizes",
+        sizes: [
+          { name: "وسط (٢٠ سم)", price: 220 },
+          { name: "كبير (٢٦ سم)", price: 340 }
+        ],
+        variants: [
+          { name: "وسط (٢٠ سم)", price: 220 },
+          { name: "كبير (٢٦ سم)", price: 340 }
+        ],
+        priceNum: 220,
+        priceText: "يبدأ من ٢٢٠ ج.م",
+        description: "طبقات ريد فيلفيت مخملية غنية بكريمة الجبن الفاخرة وتزيين يدوي أنيق للمناسبات السعيدة.",
+        image: "https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=800&q=80",
+        badge: "أحجام ومقاسات",
+        isAvailable: true
+      }
+    ];
+
+    const DEFAULT_CATEGORIES = [
+      { id: "all", name: "الكل" },
+      { id: "cheesecake", name: "تشيز كيك" },
+      { id: "donuts", name: "دوناتس" },
+      { id: "bakery", name: "مخبوزات" }
+    ];
+
+    const DEFAULT_SETTINGS = {
+      deliveryFee: 40,
+      minOrderAmount: 100,
+      isStoreOpen: true,
+      workingHours: "يومياً: ٩:٠٠ ص - ١١:٠٠ م",
+      whatsappPhone: "201068617307",
+      socialLinks: {
+        instagram: "https://instagram.com",
+        tiktok: "https://tiktok.com",
+        facebook: "https://facebook.com",
+        whatsapp: "https://wa.me/201068617307"
+      }
+    };
+
+    // 3. دوال مساعدة للتعامل مع localStorage
+    function getStoredData(key, fallback) {
+      try {
+        const item = localStorage.getItem(key);
+        return item ? JSON.parse(item) : fallback;
+      } catch (e) {
+        console.error('Error reading key:', key, e);
+        return fallback;
+      }
+    }
+
+    function setStoredData(key, val) {
+      try {
+        localStorage.setItem(key, JSON.stringify(val));
+      } catch (e) {
+        console.error('Error saving key:', key, e);
+      }
+    }
+
+    // تهيئة البيانات الأساسية في التخزين عند أول زيارة للمتجر فقط مع الحفاظ التام على تعديلات وحذف البيانات
+    function ensureInitialData() {
+      const isInitialized = localStorage.getItem('bosy_sweet_data_initialized');
+      const storedProds = getStoredData(KEYS.PRODUCTS, null);
+
+      if (!isInitialized || !storedProds || !Array.isArray(storedProds) || storedProds.length === 0) {
+        setStoredData(KEYS.PRODUCTS, DEFAULT_PRODUCTS);
+        if (!localStorage.getItem(KEYS.CATEGORIES)) setStoredData(KEYS.CATEGORIES, DEFAULT_CATEGORIES);
+        if (!localStorage.getItem(KEYS.SETTINGS)) setStoredData(KEYS.SETTINGS, DEFAULT_SETTINGS);
+        if (!localStorage.getItem(KEYS.ORDERS)) setStoredData(KEYS.ORDERS, []);
+        localStorage.setItem('bosy_sweet_data_initialized', 'true');
+      } else {
+        // الحفاظ على تعديلات الأصناف والأسعار والمحذوفات مع تنظيف أي بيانات معطوبة
+        const cleanProds = storedProds.filter(p => p && p.name && p.name !== 'undefined');
+        let needsSave = cleanProds.length !== storedProds.length;
+        cleanProds.forEach(p => {
+          if (Array.isArray(p.flavors) && p.flavors.some(f => typeof f === 'string')) {
+            p.flavors = p.flavors.map(f => typeof f === 'string' ? { name: f, price: p.priceNum || 0 } : f);
+            needsSave = true;
+          }
+        });
+        if (needsSave) {
+          setStoredData(KEYS.PRODUCTS, cleanProds);
+        }
+      }
+      if (!localStorage.getItem(KEYS.CATEGORIES)) setStoredData(KEYS.CATEGORIES, DEFAULT_CATEGORIES);
+      if (!localStorage.getItem(KEYS.SETTINGS)) setStoredData(KEYS.SETTINGS, DEFAULT_SETTINGS);
+      if (!localStorage.getItem(KEYS.ORDERS)) setStoredData(KEYS.ORDERS, []);
+    }
+    ensureInitialData();
+
+    // حالة التطبيق
+    let products = [];
+    let categories = [];
+    let settings = {};
+    let cart = [];
+    let currentFilter = 'all';
+
+    // تحميل السلة من التخزين المحلي
+    function loadCartFromStorage() {
+      return getStoredData(KEYS.CART, []);
+    }
+
+    // حفظ السلة في التخزين المحلي
+    function saveCartToStorage() {
+      setStoredData(KEYS.CART, cart);
+    }
+
+    // تحميل كافة البيانات الحالية مع فلترة أي صنف غير صالح
+    function loadAllData() {
+      // إذا كان Firebase متصلاً، لا نُحمّل المنتجات من الذاكرة المحلية مسبقاً
+      // لأن Firestore هو المصدر الرسمي الوحيد، ونتجنب وميض بيانات قديمة قبل وصول البيانات الحية
+      if (db) {
+        products = [];
+      } else {
+        const rawProds = getStoredData(KEYS.PRODUCTS, DEFAULT_PRODUCTS);
+        products = rawProds.filter(p => p && p.name && p.name !== 'undefined');
+        if (products.length !== rawProds.length) {
+          setStoredData(KEYS.PRODUCTS, products);
+        }
+      }
+      categories = getStoredData(KEYS.CATEGORIES, DEFAULT_CATEGORIES);
+      settings = getStoredData(KEYS.SETTINGS, DEFAULT_SETTINGS);
+      cart = loadCartFromStorage();
+      applySettingsUI();
+    }
+
+    // دالة تحويل الأرقام لأرقام عربية شرقية
+    function toArabicDigits(str) {
+      if (str === null || str === undefined) return '';
+      return str.toString().replace(/[0-9]/g, d => '٠١٢٣٤٥٦٧٨٩'[d]);
+    }
+
+    // تطبيق إعدادات المتجر العامة (أوقات العمل + أرقام الواتساب)
+    function applySettingsUI() {
+      updateCartUI();
+
+      // 2. تحديث نص أوقات العمل في كافة أماكن الصفحة
+      const currentHours = settings.workingHours || DEFAULT_SETTINGS.workingHours;
+      const workingHoursDisplay = document.getElementById('working-hours-display');
+      if (workingHoursDisplay) workingHoursDisplay.textContent = currentHours;
+
+      const workingHoursBadge = document.getElementById('working-hours-badge-text');
+      if (workingHoursBadge) workingHoursBadge.textContent = currentHours;
+
+      const headerWorkingHours = document.getElementById('header-working-hours');
+      if (headerWorkingHours) headerWorkingHours.textContent = currentHours;
+
+      const mobileWorkingHours = document.getElementById('mobile-working-hours');
+      if (mobileWorkingHours) mobileWorkingHours.textContent = currentHours;
+
+      // 3. تحديث روابط الواتساب في كافة أنحاء الصفحة
+      const phone = settings.whatsappPhone || "201068617307";
+      const cleanPhone = phone.replace(/[^0-9]/g, '');
+      const waUrl = `https://wa.me/${cleanPhone}`;
+
+      const headerWa = document.getElementById('header-whatsapp-btn');
+      if (headerWa) headerWa.href = waUrl;
+
+      const heroWa = document.getElementById('hero-whatsapp-btn');
+      if (heroWa) heroWa.href = waUrl;
+
+      const contactWa = document.getElementById('contact-whatsapp-btn');
+      const contactDisplay = document.getElementById('contact-whatsapp-display');
+      if (contactWa) contactWa.href = waUrl;
+      if (contactDisplay) {
+        contactDisplay.textContent = cleanPhone.startsWith('20') ? '0' + cleanPhone.slice(2) : cleanPhone;
+      }
+
+      const customEventsWa = document.getElementById('custom-events-wa-btn');
+      if (customEventsWa) {
+        const textMsg = encodeURIComponent("مرحباً بوسي سويت، أرغب في الاستفسار عن حجز وتفصيل تورتة أو حلويات لمناسبة خاصة");
+        customEventsWa.href = `https://wa.me/${cleanPhone}?text=${textMsg}`;
+      }
+
+      // 4. تحديث روابط وسائل التواصل الاجتماعي في الفوتر مع إخفاء أي منصة فارغة
+      const social = settings.socialLinks || DEFAULT_SETTINGS.socialLinks || {};
+
+      function bindSocialLink(elementId, url) {
+        const el = document.getElementById(elementId);
+        if (!el) return;
+        const trimmed = (url || '').trim();
+        if (trimmed) {
+          let finalUrl = trimmed;
+          if (!finalUrl.startsWith('http://') && !finalUrl.startsWith('https://')) {
+            if (finalUrl.startsWith('wa.me')) {
+              finalUrl = `https://${finalUrl}`;
+            } else if (/^[0-9+]+$/.test(finalUrl)) {
+              finalUrl = `https://wa.me/${finalUrl.replace(/[^0-9]/g, '')}`;
+            } else {
+              finalUrl = `https://${finalUrl}`;
+            }
+          }
+          el.href = finalUrl;
+          el.target = '_blank';
+          el.rel = 'noopener noreferrer';
+          el.classList.remove('hidden');
+        } else {
+          el.classList.add('hidden');
+        }
+      }
+
+      bindSocialLink('footer-instagram-link', social.instagram);
+      bindSocialLink('footer-tiktok-link', social.tiktok);
+      bindSocialLink('footer-facebook-link', social.facebook);
+      bindSocialLink('footer-whatsapp-link', social.whatsapp || waUrl);
+    }
+
+    // خريطة أيقونات الأقسام الفيكتور (Font Awesome 6)
+    const CATEGORY_ICONS = {
+      'all': 'fa-solid fa-border-all',
+      'cheesecake': 'fa-solid fa-cake-candles',
+      'donuts': 'fa-solid fa-cookie',
+      'bakery': 'fa-solid fa-bread-slice'
+    };
+
+    // 4. توليد أزرار تبويبات الأقسام ديناميكياً من لوحة التحكم مع أيقونات فيكتور وعداد الأصناف
+    function renderCategoryFilters() {
+      const filterContainer = document.getElementById('category-filters');
+      if (!filterContainer) return;
+
+      filterContainer.innerHTML = categories.map(cat => {
+        const isActive = cat.id === currentFilter;
+        const iconClass = CATEGORY_ICONS[cat.id] || 'fa-solid fa-utensils';
+        const count = cat.id === 'all' 
+          ? products.length 
+          : products.filter(p => p.category === cat.id).length;
+
+        const activeClasses = 'filter-btn px-4 sm:px-6 py-2.5 rounded-2xl text-xs sm:text-sm font-extrabold bg-gradient-to-r from-caramel to-caramel-hover text-white shadow-lg shadow-caramel/25 border border-caramel/40 scale-105 transition-all duration-300 cursor-pointer flex items-center gap-2 font-cairo';
+        const inactiveClasses = 'filter-btn px-4 sm:px-6 py-2.5 rounded-2xl text-xs sm:text-sm font-bold bg-white/80 backdrop-blur-md hover:bg-white text-choco-800 border border-white/80 hover:border-caramel/40 shadow-xs hover:shadow-md hover:-translate-y-0.5 transition-all duration-300 cursor-pointer flex items-center gap-2 font-cairo';
+
+        return `
+          <button 
+            type="button" 
+            onclick="setCategory('${cat.id}')" 
+            data-filter="${cat.id}" 
+            class="${isActive ? activeClasses : inactiveClasses}"
+          >
+            <i class="${iconClass} text-xs ${isActive ? 'text-white' : 'text-caramel'}"></i>
+            <span>${cat.name}</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full font-black ${isActive ? 'bg-white/25 text-white' : 'bg-[#231610]/5 text-choco-700'}">
+              ${toArabicDigits(count)}
+            </span>
+          </button>
+        `;
+      }).join('');
+    }
+
+    // ==================== البحث الحي في المنيو (Live Menu Search) ====================
+    let menuSearchQuery = '';
+
+    function handleMenuSearch(val) {
+      menuSearchQuery = (val || '').trim();
+      const clearBtn = document.getElementById('menu-search-clear');
+      if (clearBtn) {
+        if (menuSearchQuery) {
+          clearBtn.classList.remove('hidden');
+        } else {
+          clearBtn.classList.add('hidden');
+        }
+      }
+      renderProducts(currentFilter);
+    }
+
+    function clearMenuSearch() {
+      const input = document.getElementById('menu-search-input');
+      if (input) input.value = '';
+      menuSearchQuery = '';
+      const clearBtn = document.getElementById('menu-search-clear');
+      if (clearBtn) clearBtn.classList.add('hidden');
+      renderProducts(currentFilter);
+      if (input) input.focus();
+    }
+
+    // 5. رسم كروت المنتجات مع دعم حالة التوفر (متوفر / نفدت الكمية) والبحث الفوري
+    function renderProducts(filter = currentFilter) {
+      currentFilter = filter;
+      const grid = document.getElementById('products-grid');
+      if (!grid) return;
+
+      let filtered = filter === 'all' 
+        ? products 
+        : products.filter(p => p.category === filter);
+
+      if (menuSearchQuery) {
+        const query = menuSearchQuery.toLowerCase();
+        filtered = filtered.filter(p => {
+          const name = (p.name || '').toLowerCase();
+          const desc = (p.description || '').toLowerCase();
+          const badge = (p.badge || '').toLowerCase();
+          const catObj = categories.find(c => c.id === p.category);
+          const catName = (catObj ? catObj.name : '').toLowerCase();
+          const flavorsMatch = Array.isArray(p.flavors) && p.flavors.some(f => (typeof f === 'string' ? f : f.name || '').toLowerCase().includes(query));
+          const sizesMatch = Array.isArray(p.sizes) && p.sizes.some(s => (s.name || '').toLowerCase().includes(query));
+          return name.includes(query) || desc.includes(query) || badge.includes(query) || catName.includes(query) || flavorsMatch || sizesMatch;
+        });
+      }
+
+      if (filtered.length === 0) {
+        if (menuSearchQuery) {
+          grid.innerHTML = `
+            <div class="col-span-full py-14 text-center text-choco-600 bg-white/80 backdrop-blur-xl rounded-3xl border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)] space-y-3">
+              <div class="w-12 h-12 rounded-full bg-caramel/10 text-caramel flex items-center justify-center mx-auto">
+                <i class="fa-solid fa-magnifying-glass text-xl"></i>
+              </div>
+              <h4 class="font-bold text-base text-choco-900">لم يتم العثور على نتائج تطابق "${menuSearchQuery}"</h4>
+              <p class="text-xs text-choco-500">جرب البحث باسم صنف آخر (مثل: تشيز كيك، دوناتس، سينابون)</p>
+              <button type="button" onclick="clearMenuSearch()" class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-caramel hover:bg-caramel-hover text-white text-xs font-bold transition-all shadow-xs cursor-pointer">
+                <i class="fa-solid fa-rotate-left text-xs"></i>
+                <span>عرض كل الأصناف</span>
+              </button>
+            </div>
+          `;
+          return;
+        }
+
+        grid.innerHTML = `
+          <div class="col-span-full py-16 text-center text-choco-600 bg-white/80 backdrop-blur-xl rounded-3xl border border-white/80 shadow-[0_8px_30px_rgb(0,0,0,0.04)] space-y-2">
+            <i class="fa-solid fa-cookie text-3xl text-caramel/40 mb-1"></i>
+            <h4 class="font-bold text-base text-choco-900">لا توجد أصناف في هذا القسم حالياً</h4>
+            <p class="text-xs text-choco-500">اختر قسماً آخر أو تفضل بتصفح كل منتجاتنا الحرفية</p>
+          </div>
+        `;
+        return;
+      }
+
+      // خريطة لتتبع الوزن المختار لكل صنف بالكيلو
+      // خريطة لتتبع الوزن المختار لكل صنف بالكيلو وخريطة الأحجام
+      if (!window.selectedProductWeights) window.selectedProductWeights = {};
+      if (!window.selectedProductSizes) window.selectedProductSizes = {};
+
+      grid.innerHTML = filtered.map(product => {
+        const isKilo = product.pricingType === 'kilo';
+        const isSizes = product.pricingType === 'sizes';
+        const isAvailable = product.isAvailable !== false;
+
+        // حساب أسعار الأوزان للصنف بالكيلو
+        const kiloPrice = product.priceNum;
+        const quarterPrice = product.quarterPrice || Math.round(kiloPrice * 0.25);
+        const halfPrice = product.halfPrice || Math.round(kiloPrice * 0.5);
+
+        // الوزن المختار حالياً للصنف بالكيلو
+        const activeWeight = window.selectedProductWeights[product.id] || 'quarter';
+
+        // الأحجام المتاحة والمقاس المختار حالياً
+        const sizesList = (isSizes && Array.isArray(product.sizes) && product.sizes.length > 0) 
+          ? product.sizes 
+          : [{ name: 'عادي', price: product.priceNum }];
+        const activeSizeIdx = window.selectedProductSizes[product.id] ?? 0;
+        const activeSize = sizesList[activeSizeIdx] || sizesList[0];
+
+        let activePrice = product.priceNum;
+        let activeWeightName = '';
+        let activeSizeName = '';
+
+        if (isKilo) {
+          if (activeWeight === 'quarter') {
+            activePrice = quarterPrice;
+            activeWeightName = 'ربع كجم';
+          } else if (activeWeight === 'half') {
+            activePrice = halfPrice;
+            activeWeightName = 'نصف كجم';
+          } else {
+            activePrice = kiloPrice;
+            activeWeightName = '١ كجم';
+          }
+        } else if (isSizes) {
+          activePrice = activeSize.price;
+          activeSizeName = activeSize.name;
+        }
+
+        // معرف فريد لعنصر السلة بحسب نوعه ووزنه وحجمه
+        let cartItemId = String(product.id);
+        if (isKilo) cartItemId += `-${activeWeight}`;
+        if (isSizes) cartItemId += `-sz-${activeSize.name}`;
+
+        const cartItem = cart.find(item => String(item.cartItemId || item.id) === cartItemId);
+        const qty = cartItem ? cartItem.quantity : 0;
+
+        // خيارات الأوزان للصنف (تظهر فقط للأصناف المباعة بالكيلو)
+        let weightPillsHTML = '';
+        if (isKilo && isAvailable) {
+          weightPillsHTML = `
+            <div class="mt-2 mb-3 p-1 bg-[#FAF7F2] rounded-xl flex flex-wrap items-center gap-1 border border-choco-900/5 select-none font-cairo" dir="rtl">
+              <button 
+                type="button" 
+                onclick="event.stopPropagation(); setProductWeight(${product.id}, 'quarter')" 
+                class="flex-1 min-w-[56px] py-1 px-1 rounded-lg text-[10px] sm:text-xs font-bold transition-all cursor-pointer text-center whitespace-nowrap ${activeWeight === 'quarter' ? 'bg-caramel text-white shadow-xs' : 'text-choco-700 hover:text-choco-950'}"
+                title="ربع كيلو (٢٥٠ جم)"
+              >
+                ربع كجم
+              </button>
+              <button 
+                type="button" 
+                onclick="event.stopPropagation(); setProductWeight(${product.id}, 'half')" 
+                class="flex-1 min-w-[56px] py-1 px-1 rounded-lg text-[10px] sm:text-xs font-bold transition-all cursor-pointer text-center whitespace-nowrap ${activeWeight === 'half' ? 'bg-caramel text-white shadow-xs' : 'text-choco-700 hover:text-choco-950'}"
+                title="نصف كيلو (٥٠٠ جم)"
+              >
+                نصف كجم
+              </button>
+              <button 
+                type="button" 
+                onclick="event.stopPropagation(); setProductWeight(${product.id}, 'kilo')" 
+                class="flex-1 min-w-[56px] py-1 px-1 rounded-lg text-[10px] sm:text-xs font-bold transition-all cursor-pointer text-center whitespace-nowrap ${activeWeight === 'kilo' ? 'bg-caramel text-white shadow-xs' : 'text-choco-700 hover:text-choco-950'}"
+                title="كيلو كامل (١٠٠٠ جم)"
+              >
+                ١ كجم
+              </button>
+            </div>
+          `;
+        }
+
+        // خيارات الأحجام والمقاسات للصنف (تظهر للأصناف متعددة المقاسات)
+        let sizePillsHTML = '';
+        if (isSizes && isAvailable && sizesList.length > 0) {
+          sizePillsHTML = `
+            <div class="mt-2 mb-3 p-1 bg-[#FAF7F2] rounded-xl flex flex-wrap items-center gap-1 border border-choco-900/5 select-none font-cairo" dir="rtl">
+              ${sizesList.map((sz, idx) => `
+                <button 
+                  type="button" 
+                  onclick="event.stopPropagation(); setProductSize(${product.id}, ${idx})" 
+                  class="flex-1 min-w-[56px] py-1 px-1 rounded-lg text-[10px] sm:text-xs font-bold transition-all cursor-pointer text-center whitespace-nowrap ${idx === activeSizeIdx ? 'bg-caramel text-white shadow-xs' : 'text-choco-700 hover:text-choco-950'}"
+                  title="${sz.name} (${toArabicDigits(sz.price)} ج.م)"
+                >
+                  ${sz.name}
+                </button>
+              `).join('')}
+            </div>
+          `;
+        }
+
+        const hasFlavors = Array.isArray(product.flavors) && product.flavors.length > 0;
+
+        // بادج السعر الزجاجي العائم في زاوية الصورة (مع ثبات كامل للاتجاه والترتيب)
+        let floatingPriceHTML = '';
+        if (isKilo) {
+          floatingPriceHTML = `
+            <div class="price-badge-pill absolute bottom-2.5 left-2.5 z-10 bg-white/95 backdrop-blur-md px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl border border-white/80 shadow-md flex items-center gap-1 font-cairo select-none" dir="rtl">
+              <span class="text-xs sm:text-sm font-black text-choco-950">${toArabicDigits(activePrice)}</span>
+              <span class="text-[10px] sm:text-xs font-black text-caramel">ج.م</span>
+              <span class="text-[9px] sm:text-[10px] font-bold text-[#5C4538] mr-0.5">/ ${activeWeightName}</span>
+            </div>
+          `;
+        } else if (isSizes) {
+          floatingPriceHTML = `
+            <div class="price-badge-pill absolute bottom-2.5 left-2.5 z-10 bg-white/95 backdrop-blur-md px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl border border-white/80 shadow-md flex items-center gap-1 font-cairo select-none" dir="rtl">
+              <span class="text-xs sm:text-sm font-black text-choco-950">${toArabicDigits(activePrice)}</span>
+              <span class="text-[10px] sm:text-xs font-black text-caramel">ج.م</span>
+              <span class="text-[9px] sm:text-[10px] font-bold text-[#5C4538] mr-0.5">/ ${activeSizeName}</span>
+            </div>
+          `;
+        } else if (hasFlavors) {
+          const flavorPrices = product.flavors.map(f => (typeof f === 'object' && f.price) ? Number(f.price) : product.priceNum);
+          const minPrice = Math.min(...flavorPrices);
+          floatingPriceHTML = `
+            <div class="price-badge-pill absolute bottom-2.5 left-2.5 z-10 bg-white/95 backdrop-blur-md px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl border border-white/80 shadow-md flex items-center gap-1 font-cairo select-none" dir="rtl">
+              <span class="text-[10px] sm:text-xs font-bold text-[#5C4538]">يبدأ من</span>
+              <span class="text-xs sm:text-sm font-black text-choco-950">${toArabicDigits(minPrice)}</span>
+              <span class="text-[10px] sm:text-xs font-black text-caramel">ج.م</span>
+            </div>
+          `;
+        } else {
+          floatingPriceHTML = `
+            <div class="price-badge-pill absolute bottom-2.5 left-2.5 z-10 bg-white/95 backdrop-blur-md px-2.5 sm:px-3 py-1 sm:py-1.5 rounded-xl border border-white/80 shadow-md flex items-center gap-1 font-cairo select-none" dir="rtl">
+              <span class="text-xs sm:text-sm font-black text-choco-950">${toArabicDigits(product.priceNum)}</span>
+              <span class="text-[10px] sm:text-xs font-black text-caramel">ج.م</span>
+            </div>
+          `;
+        }
+
+        // زر الشراء أو أزرار زيادة ونقصان الكمية
+        let actionButtonHTML = '';
+        if (!isAvailable) {
+          actionButtonHTML = `
+            <button 
+              type="button" 
+              disabled 
+              class="w-full py-2.5 sm:py-3 rounded-2xl bg-cream-200 text-choco-600 text-xs sm:text-sm font-bold flex items-center justify-center gap-2 cursor-not-allowed opacity-75 font-cairo shadow-2xs"
+              title="نفدت الكمية حالياً"
+            >
+              <i class="fa-solid fa-ban text-[11px] text-red-500"></i>
+              <span>نفدت الكمية حالياً</span>
+            </button>
+          `;
+        } else if (hasFlavors) {
+          actionButtonHTML = `
+            <button 
+              type="button" 
+              onclick="event.stopPropagation(); handleProductCardAction(${product.id}, '${isKilo ? activeWeight : ''}', ${isSizes ? activeSizeIdx : 'null'})" 
+              class="w-full py-2.5 sm:py-3 rounded-2xl bg-gradient-to-r from-caramel to-caramel-hover hover:from-caramel-hover hover:to-[#915622] text-white font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md shadow-caramel/20 hover:shadow-lg transition-all active:scale-[0.98] cursor-pointer font-cairo"
+              title="أضف ${product.name} إلى السلة"
+            >
+              <i class="fa-solid fa-bag-shopping text-sm"></i>
+              <span>أضف للسلة</span>
+            </button>
+          `;
+        } else if (qty > 0) {
+          actionButtonHTML = `
+            <div class="w-full flex items-center justify-between bg-[#F2EAE0] rounded-2xl p-1 sm:p-1.5 border border-caramel/30 shadow-xs font-cairo">
+              <button 
+                type="button" 
+                onclick="event.stopPropagation(); changeItemQuantity('${cartItemId}', -1)" 
+                class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-white hover:bg-cream-100 text-choco-900 flex items-center justify-center text-xs font-black shadow-xs active:scale-95 transition-all cursor-pointer"
+                title="تقليل الكمية"
+              >
+                <i class="fa-solid fa-minus text-[10px]"></i>
+              </button>
+              <span class="text-sm sm:text-base font-black text-choco-950 px-2 sm:px-3 text-center min-w-[32px]">${toArabicDigits(qty)}</span>
+              <button 
+                type="button" 
+                onclick="event.stopPropagation(); changeItemQuantity('${cartItemId}', 1)" 
+                class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-caramel hover:bg-caramel-hover text-white flex items-center justify-center text-xs font-black shadow-xs active:scale-95 transition-all cursor-pointer"
+                title="زيادة الكمية"
+              >
+                <i class="fa-solid fa-plus text-[10px]"></i>
+              </button>
+            </div>
+          `;
+        } else {
+          actionButtonHTML = `
+            <button 
+              type="button" 
+              onclick="event.stopPropagation(); handleProductCardAction(${product.id}, '${isKilo ? activeWeight : ''}', ${isSizes ? activeSizeIdx : 'null'})" 
+              class="w-full py-2.5 sm:py-3 rounded-2xl bg-gradient-to-r from-caramel to-caramel-hover hover:from-caramel-hover hover:to-[#915622] text-white font-extrabold text-xs sm:text-sm flex items-center justify-center gap-2 shadow-md shadow-caramel/20 hover:shadow-lg transition-all active:scale-[0.98] cursor-pointer font-cairo"
+              title="أضف ${product.name} إلى السلة"
+            >
+              <i class="fa-solid fa-bag-shopping text-sm"></i>
+              <span>أضف للسلة</span>
+            </button>
+          `;
+        }
+
+        // شارات التميز وحالة الصنف
+        let badgeHTML = '';
+        if (!isAvailable) {
+          badgeHTML = `
+            <span class="absolute top-2.5 right-2.5 z-10 bg-red-600/90 backdrop-blur-md text-white text-[10px] sm:text-xs font-bold px-2.5 py-1 rounded-xl shadow-md border border-white/20 font-cairo flex items-center gap-1">
+              <i class="fa-solid fa-ban text-[10px]"></i>
+              <span>نفدت الكمية</span>
+            </span>
+          `;
+        } else if (isKilo) {
+          badgeHTML = `
+            <span class="absolute top-2.5 right-2.5 z-10 bg-gradient-to-r from-caramel to-amber-600 text-white text-[10px] sm:text-xs font-bold px-2.5 py-1 rounded-xl shadow-md border border-white/20 font-cairo flex items-center gap-1">
+              <i class="fa-solid fa-scale-balanced text-[10px]"></i>
+              <span>بالكيلو والوزن</span>
+            </span>
+          `;
+        } else if (isSizes) {
+          badgeHTML = `
+            <span class="absolute top-2.5 right-2.5 z-10 bg-gradient-to-r from-blue-600 to-indigo-600 text-white text-[10px] sm:text-xs font-bold px-2.5 py-1 rounded-xl shadow-md border border-white/20 font-cairo flex items-center gap-1">
+              <i class="fa-solid fa-ruler-combined text-[10px]"></i>
+              <span>أحجام ومقاسات</span>
+            </span>
+          `;
+        } else if (product.badge) {
+          badgeHTML = `
+            <span class="absolute top-2.5 right-2.5 z-10 bg-gradient-to-r from-caramel to-[#915622] text-white text-[10px] sm:text-xs font-bold px-2.5 py-1 rounded-xl shadow-md border border-white/20 font-cairo flex items-center gap-1">
+              <i class="fa-solid fa-crown text-[10px] text-amber-300"></i>
+              <span>${product.badge}</span>
+            </span>
+          `;
+        }
+
+        return `
+          <div 
+            ${hasFlavors && isAvailable ? `onclick="handleProductCardAction(${product.id}, '${isKilo ? activeWeight : ''}', ${isSizes ? activeSizeIdx : 'null'})"` : ''}
+            class="bg-white/90 backdrop-blur-md rounded-3xl p-3 sm:p-4 border border-white/80 hover:border-caramel/40 shadow-[0_8px_30px_rgb(0,0,0,0.04)] hover:shadow-2xl hover:shadow-caramel/20 hover:-translate-y-2 transition-all duration-500 flex flex-col justify-between group relative overflow-hidden ${!isAvailable ? 'opacity-85' : ''} ${hasFlavors && isAvailable ? 'cursor-pointer' : ''}"
+          >
+            <div>
+              <div class="relative overflow-hidden rounded-2xl aspect-square mb-3 bg-[#FAF7F2] border border-[#231610]/5 shadow-xs">
+                <img 
+                  src="${product.image}" 
+                  alt="${product.name}" 
+                  class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out ${!isAvailable ? 'grayscale-[35%]' : ''}"
+                  loading="lazy"
+                />
+                ${badgeHTML}
+                ${floatingPriceHTML}
+              </div>
+              <h3 class="font-extrabold text-sm sm:text-base lg:text-lg text-choco-950 mb-1 group-hover:text-caramel transition-colors line-clamp-2 min-h-[2.6rem] sm:min-h-[2.8rem] leading-snug">
+                ${product.name}
+              </h3>
+              <p class="text-[11px] sm:text-xs text-[#5C4538] leading-relaxed mb-2 font-normal line-clamp-4">
+                ${product.description || ''}
+              </p>
+              ${weightPillsHTML}
+              ${sizePillsHTML}
+            </div>
+
+            <div class="mt-auto pt-2 sm:pt-2.5 border-t border-[#231610]/5">
+              ${actionButtonHTML}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // تعيين وزن صنف بالكيلو
+    function setProductWeight(productId, weight) {
+      if (!window.selectedProductWeights) window.selectedProductWeights = {};
+      window.selectedProductWeights[productId] = weight;
+      renderProducts(currentFilter);
+    }
+
+    // تعيين حجم صنف ذي أحجام متعددة
+    function setProductSize(productId, sizeIdx) {
+      if (!window.selectedProductSizes) window.selectedProductSizes = {};
+      window.selectedProductSizes[productId] = sizeIdx;
+      renderProducts(currentFilter);
+    }
+
+    // 6. اختيار وتفعيل القسم
+    function setCategory(category) {
+      currentFilter = category;
+      renderCategoryFilters();
+      renderProducts(category);
+    }
+
+    // 6.5. إدارة نافذة اختيار النكهات (Flavor Selection Modal)
+    let currentFlavorModalState = {
+      productId: null,
+      weight: '',
+      sizeIndex: null,
+      selectedFlavor: null,
+      quantity: 1
+    };
+
+    // التوجيه الذكي لإجراء الكارت (فتح نافذة النكهات إن وجدت أو الإضافة المباشرة للسلة)
+    function handleProductCardAction(productId, weight = '', sizeIdx = null) {
+      const product = products.find(p => p.id === productId);
+      if (!product || product.isAvailable === false) return;
+      const hasFlavors = Array.isArray(product.flavors) && product.flavors.length > 0;
+      if (hasFlavors) {
+        openFlavorModal(productId, weight, sizeIdx);
+      } else {
+        addToCart(productId, weight, null, 1, sizeIdx);
+      }
+    }
+
+    function openFlavorModal(productId, weight = '', sizeIdx = null) {
+      const product = products.find(p => p.id === productId);
+      if (!product || !Array.isArray(product.flavors) || product.flavors.length === 0) return;
+
+      if (product.isAvailable === false) {
+        showToast(`نعتذر، هذا الصنف (${product.name}) نفدت كميته حالياً`);
+        return;
+      }
+
+      const isKilo = product.pricingType === 'kilo';
+      const isSizes = product.pricingType === 'sizes';
+      const activeWeight = isKilo ? (weight || (window.selectedProductWeights && window.selectedProductWeights[productId]) || 'quarter') : '';
+      const chosenSizeIdx = isSizes ? (sizeIdx !== null ? sizeIdx : ((window.selectedProductSizes && window.selectedProductSizes[productId]) ?? 0)) : null;
+
+      const normalizedFlavors = (product.flavors || product.variants || []).map(f => {
+        if (typeof f === 'string') return { name: f, price: product.priceNum };
+        return { name: f.name, price: Number(f.price) || product.priceNum };
+      });
+
+      const initialFlavor = normalizedFlavors[0];
+
+      currentFlavorModalState = {
+        productId: product.id,
+        weight: activeWeight,
+        sizeIndex: chosenSizeIdx,
+        selectedFlavor: initialFlavor,
+        quantity: 1
+      };
+
+      const imgEl = document.getElementById('flavor-modal-img');
+      const nameEl = document.getElementById('flavor-modal-name');
+      const priceEl = document.getElementById('flavor-modal-price');
+      const weightTagEl = document.getElementById('flavor-modal-weight-tag');
+      const sizeTagEl = document.getElementById('flavor-modal-size-tag');
+      const qtyEl = document.getElementById('flavor-modal-qty');
+
+      if (imgEl) imgEl.src = product.image;
+      if (nameEl) nameEl.textContent = product.name;
+
+      let basePrice = product.priceNum;
+      let weightTag = '';
+      let sizeTag = '';
+
+      if (isKilo) {
+        if (activeWeight === 'quarter') {
+          basePrice = product.quarterPrice || Math.round(product.priceNum * 0.25);
+          weightTag = 'ربع كيلو';
+        } else if (activeWeight === 'half') {
+          basePrice = product.halfPrice || Math.round(product.priceNum * 0.5);
+          weightTag = 'نصف كيلو';
+        } else {
+          basePrice = product.priceNum;
+          weightTag = 'كيلو كامل';
+        }
+      } else if (isSizes && Array.isArray(product.sizes) && product.sizes.length > 0) {
+        const szObj = product.sizes[chosenSizeIdx] || product.sizes[0];
+        basePrice = szObj.price;
+        sizeTag = `حجم: ${szObj.name}`;
+      }
+
+      // السعر المباشر للخيار المختار
+      const unitPrice = initialFlavor.price || basePrice;
+
+      if (priceEl) priceEl.textContent = `${toArabicDigits(unitPrice)} ج.م`;
+      if (weightTagEl) {
+        if (weightTag) {
+          weightTagEl.textContent = weightTag;
+          weightTagEl.classList.remove('hidden');
+        } else {
+          weightTagEl.classList.add('hidden');
+        }
+      }
+      if (sizeTagEl) {
+        if (sizeTag) {
+          sizeTagEl.textContent = sizeTag;
+          sizeTagEl.classList.remove('hidden');
+        } else {
+          sizeTagEl.classList.add('hidden');
+        }
+      }
+      if (qtyEl) qtyEl.textContent = toArabicDigits(1);
+
+      renderFlavorPills(normalizedFlavors, initialFlavor.name);
+
+      const modal = document.getElementById('flavor-modal');
+      if (modal) {
+        modal.classList.remove('opacity-0', 'pointer-events-none');
+        modal.classList.add('opacity-100');
+        modal.querySelector('.transform').classList.remove('scale-95');
+        modal.querySelector('.transform').classList.add('scale-100');
+      }
+    }
+
+    function renderFlavorPills(flavors, selectedName) {
+      const container = document.getElementById('flavor-pills-container');
+      if (!container) return;
+
+      container.innerHTML = flavors.map(flavor => {
+        const fObj = typeof flavor === 'string' ? { name: flavor, price: 0 } : flavor;
+        const isSelected = fObj.name === selectedName;
+        return `
+          <button 
+            type="button" 
+            onclick="selectFlavor('${fObj.name}')" 
+            class="w-full flex items-center justify-between p-3 sm:p-3.5 rounded-2xl border text-xs sm:text-sm font-bold transition-all duration-200 cursor-pointer ${
+              isSelected 
+                ? 'bg-gradient-to-r from-caramel to-caramel-hover text-white shadow-md shadow-caramel/25 border-caramel scale-[1.01]' 
+                : 'bg-white hover:bg-cream-100 text-choco-900 border-[#231610]/15 hover:border-caramel/40'
+            }"
+          >
+            <div class="flex items-center gap-2 min-w-0 flex-1">
+              <i class="fa-solid fa-cookie-bite text-[11px] flex-shrink-0 ${isSelected ? 'text-white' : 'text-caramel'}"></i>
+              <span class="font-extrabold text-right break-words flex-1">${fObj.name}</span>
+            </div>
+            <div class="flex items-center gap-2 flex-shrink-0 mr-2">
+              <span class="text-xs sm:text-sm font-black px-2.5 py-1 rounded-xl whitespace-nowrap ${isSelected ? 'bg-white/20 text-white' : 'bg-caramel/10 text-caramel'}">
+                ${toArabicDigits(fObj.price)} ج.م
+              </span>
+              <i class="fa-solid ${isSelected ? 'fa-circle-check text-white' : 'fa-circle text-choco-300'} text-xs"></i>
+            </div>
+          </button>
+        `;
+      }).join('');
+    }
+
+    function selectFlavor(flavorName) {
+      const product = products.find(p => p.id === currentFlavorModalState.productId);
+      if (!product || !Array.isArray(product.flavors)) return;
+
+      const normalizedFlavors = (product.flavors || product.variants || []).map(f => {
+        if (typeof f === 'string') return { name: f, price: product.priceNum };
+        return { name: f.name, price: Number(f.price) || product.priceNum };
+      });
+      const chosen = normalizedFlavors.find(f => f.name === flavorName) || normalizedFlavors[0];
+      currentFlavorModalState.selectedFlavor = chosen;
+
+      renderFlavorPills(normalizedFlavors, chosen.name);
+
+      const unitPrice = chosen.price || product.priceNum;
+      const priceEl = document.getElementById('flavor-modal-price');
+      if (priceEl) priceEl.textContent = `${toArabicDigits(unitPrice * currentFlavorModalState.quantity)} ج.م`;
+    }
+
+    function adjustFlavorQty(delta) {
+      let newQty = currentFlavorModalState.quantity + delta;
+      if (newQty < 1) newQty = 1;
+      currentFlavorModalState.quantity = newQty;
+      const qtyEl = document.getElementById('flavor-modal-qty');
+      if (qtyEl) qtyEl.textContent = toArabicDigits(newQty);
+
+      const unitPrice = currentFlavorModalState.selectedFlavor?.price || 0;
+      const priceEl = document.getElementById('flavor-modal-price');
+      if (priceEl && unitPrice > 0) {
+        priceEl.textContent = `${toArabicDigits(unitPrice * newQty)} ج.م`;
+      }
+    }
+
+    function closeFlavorModal() {
+      const modal = document.getElementById('flavor-modal');
+      if (modal) {
+        modal.classList.remove('opacity-100');
+        modal.classList.add('opacity-0', 'pointer-events-none');
+        modal.querySelector('.transform').classList.remove('scale-100');
+        modal.querySelector('.transform').classList.add('scale-95');
+      }
+    }
+
+    function confirmFlavorAddToCart() {
+      const { productId, weight, sizeIndex, selectedFlavor, quantity } = currentFlavorModalState;
+      if (!productId || !selectedFlavor) return;
+
+      addToCart(productId, weight, selectedFlavor, quantity, sizeIndex);
+      closeFlavorModal();
+    }
+
+    // 7. إضافة صنف للسلة (تدعم البيع بالقطعة، بأوزان الكيلو، بالأحجام، وبتسعير النكهات المباشر)
+    function addToCart(productId, weight = '', flavorInput = null, qtyToAdd = 1, sizeIndex = null) {
+      const product = products.find(p => p.id === productId);
+      if (!product) return;
+
+      if (product.isAvailable === false) {
+        showToast(`نعتذر، هذا الصنف (${product.name}) نفدت كميته حالياً`);
+        return;
+      }
+
+      const isKilo = product.pricingType === 'kilo';
+      const isSizes = product.pricingType === 'sizes';
+      const chosenWeight = isKilo ? (weight || (window.selectedProductWeights && window.selectedProductWeights[productId]) || 'quarter') : null;
+      
+      let chosenSizeObj = null;
+      let chosenSizeName = '';
+      if (isSizes && Array.isArray(product.sizes) && product.sizes.length > 0) {
+        const sIdx = sizeIndex !== null ? sizeIndex : ((window.selectedProductSizes && window.selectedProductSizes[productId]) ?? 0);
+        chosenSizeObj = product.sizes[sIdx] || product.sizes[0];
+        chosenSizeName = chosenSizeObj.name;
+      }
+
+      // معالجة النكهة وسعرها المباشر الصافي
+      let flavorName = '';
+      let flavorPrice = 0;
+      if (flavorInput) {
+        if (typeof flavorInput === 'object') {
+          flavorName = flavorInput.name || '';
+          flavorPrice = Number(flavorInput.price) || 0;
+        } else if (typeof flavorInput === 'string') {
+          flavorName = flavorInput;
+          if (Array.isArray(product.flavors)) {
+            const found = product.flavors.find(f => (typeof f === 'object' ? f.name : f) === flavorInput);
+            if (found && typeof found === 'object') flavorPrice = Number(found.price) || 0;
+          }
+        }
+      }
+
+      // معرف فريد في السلة
+      let cartItemId = String(product.id);
+      if (isKilo && chosenWeight) {
+        cartItemId += `-${chosenWeight}`;
+      }
+      if (isSizes && chosenSizeName) {
+        cartItemId += `-sz-${chosenSizeName}`;
+      }
+      if (flavorName) {
+        cartItemId += `-flv-${flavorName}`;
+      }
+
+      const existingItem = cart.find(item => String(item.cartItemId || item.id) === cartItemId);
+      if (existingItem) {
+        existingItem.quantity += qtyToAdd;
+      } else {
+        let basePrice = product.priceNum;
+        let weightLabel = '';
+        let displayName = product.name;
+
+        if (isKilo) {
+          const kiloPrice = product.priceNum;
+          if (chosenWeight === 'quarter') {
+            basePrice = product.quarterPrice || Math.round(kiloPrice * 0.25);
+            weightLabel = 'ربع كيلو (٢٥٠ جم)';
+            displayName = `${product.name} (ربع كيلو)`;
+          } else if (chosenWeight === 'half') {
+            basePrice = product.halfPrice || Math.round(kiloPrice * 0.5);
+            weightLabel = 'نصف كيلو (٥٠٠ جم)';
+            displayName = `${product.name} (نصف كيلو)`;
+          } else {
+            basePrice = kiloPrice;
+            weightLabel = 'كيلو كامل (١ كجم)';
+            displayName = `${product.name} (كيلو كامل)`;
+          }
+        } else if (isSizes && chosenSizeObj) {
+          basePrice = chosenSizeObj.price;
+          displayName = `${product.name} (${chosenSizeName})`;
+        }
+
+        // في نظام التسعير المباشر: إذا كان للخيار أو النكهة سعر محدد، فإنه يعتمد مباشرة كسعر القطعة الصافي
+        let itemUnitPrice = basePrice;
+        if (flavorName && flavorPrice > 0) {
+          itemUnitPrice = flavorPrice;
+        }
+
+        cart.push({
+          id: cartItemId,
+          cartItemId: cartItemId,
+          productId: product.id,
+          name: displayName,
+          baseName: product.name,
+          pricingType: product.pricingType || 'piece',
+          weight: chosenWeight,
+          weightLabel: weightLabel,
+          sizeName: chosenSizeName || null,
+          flavor: flavorName || null,
+          flavorPrice: flavorPrice,
+          basePrice: basePrice,
+          priceNum: itemUnitPrice,
+          priceText: `${toArabicDigits(itemUnitPrice)} ج.م`,
+          image: product.image,
+          quantity: qtyToAdd
+        });
+      }
+
+      saveCartToStorage();
+      updateCartUI();
+      renderProducts(currentFilter);
+
+      let addedTitle = product.name;
+      if (chosenSizeName) addedTitle += ` [${chosenSizeName}]`;
+      if (chosenWeight) addedTitle += ` (${chosenWeight === 'quarter' ? 'ربع كيلو' : chosenWeight === 'half' ? 'نصف كيلو' : 'كيلو'})`;
+      if (flavorName) addedTitle += ` (نكهة: ${flavorName})`;
+      const finalPrice = existingItem ? existingItem.priceNum : (flavorPrice > 0 ? flavorPrice : product.priceNum);
+      showToast(`تمت إضافة ${addedTitle} بسعر ${toArabicDigits(finalPrice)} ج.م للسلة بنجاح ✨`);
+    }
+
+    // تعديل كمية صنف (+ أو -)
+    function changeItemQuantity(cartItemId, delta) {
+      const idStr = String(cartItemId);
+      const item = cart.find(i => String(i.cartItemId || i.id) === idStr);
+
+      if (!item) {
+        if (delta > 0) {
+          const parts = idStr.split('-');
+          const prodId = parseInt(parts[0]) || parseInt(idStr);
+          const weight = (parts[1] && ['quarter', 'half', 'full'].includes(parts[1])) ? parts[1] : null;
+          const flavor = (parts[1] && !['quarter', 'half', 'full'].includes(parts[1])) ? parts[1] : (parts[2] || null);
+          addToCart(prodId, weight || '', flavor || '', 1);
+        }
+        return;
+      }
+
+      item.quantity += delta;
+      if (item.quantity <= 0) {
+        cart = cart.filter(i => String(i.cartItemId || i.id) !== idStr);
+      }
+
+      saveCartToStorage();
+      updateCartUI();
+      renderProducts(currentFilter);
+    }
+
+    // حذف صنف من السلة
+    function removeItemFromCart(cartItemId) {
+      const idStr = String(cartItemId);
+      cart = cart.filter(i => String(i.cartItemId || i.id) !== idStr);
+      saveCartToStorage();
+      updateCartUI();
+      renderProducts(currentFilter);
+    }
+
+    // تحديث واجهة السلة بالكامل وحساب رسوم التوصيل ديناميكياً
+    function updateCartUI(isInitial = false) {
+      const totalQty = cart.reduce((sum, item) => sum + item.quantity, 0);
+      const subtotal = cart.reduce((sum, item) => sum + (item.priceNum * item.quantity), 0);
+      
+      // رسوم التوصيل مأخوذة فوراً من إعدادات لوحة التحكم
+      const deliveryFeeRate = typeof settings.deliveryFee === 'number' ? settings.deliveryFee : 40;
+      const deliveryFee = cart.length > 0 ? deliveryFeeRate : 0;
+      const grandTotal = subtotal + deliveryFee;
+
+      // تحديث عداد الهيدر (بدون وميض ارتدادي scale عند الفتح أو الريفريش)
+      const headerBadge = document.getElementById('cart-badge');
+      if (headerBadge) {
+        headerBadge.textContent = toArabicDigits(totalQty);
+        if (!isInitial && totalQty > 0) {
+          headerBadge.classList.add('scale-125');
+          setTimeout(() => headerBadge.classList.remove('scale-125'), 200);
+        }
+      }
+
+      // تحديث عداد الدرج
+      const drawerCount = document.getElementById('drawer-items-count');
+      if (drawerCount) {
+        drawerCount.textContent = `${toArabicDigits(totalQty)} أصناف مختارة`;
+      }
+
+      const subtotalFormatted = `${toArabicDigits(subtotal)} ج.م`;
+      const grandTotalFormatted = `${toArabicDigits(grandTotal)} ج.م`;
+      const deliveryFormatted = cart.length > 0 ? `${toArabicDigits(deliveryFeeRate)} ج.م` : `٠ ج.م`;
+
+      const cartSubtotalElem = document.getElementById('cart-subtotal-price');
+      const cartTotalElem = document.getElementById('cart-total-price');
+      const cartDeliveryElem = document.getElementById('cart-delivery-fee');
+      const modalSubtotalElem = document.getElementById('modal-subtotal-price');
+      const modalDeliveryElem = document.getElementById('modal-delivery-fee');
+      const modalTotalElem = document.getElementById('modal-total-price');
+
+      if (cartSubtotalElem) cartSubtotalElem.textContent = subtotalFormatted;
+      if (cartTotalElem) cartTotalElem.textContent = grandTotalFormatted;
+      if (cartDeliveryElem) cartDeliveryElem.textContent = deliveryFormatted;
+      if (modalSubtotalElem) modalSubtotalElem.textContent = subtotalFormatted;
+      if (modalDeliveryElem) modalDeliveryElem.textContent = deliveryFormatted;
+      if (modalTotalElem) modalTotalElem.textContent = grandTotalFormatted;
+
+      // تحديث شريط السلة العائم السريع (Floating Bottom Checkout Bar)
+      const floatingBar = document.getElementById('floating-cart-bar');
+      const floatingQty = document.getElementById('floating-cart-qty');
+      const floatingSubtotal = document.getElementById('floating-cart-subtotal');
+      const floatingBadge = document.getElementById('floating-cart-badge');
+
+      if (floatingBar) {
+        if (cart.length > 0) {
+          if (floatingQty) floatingQty.textContent = `${toArabicDigits(totalQty)} أصناف`;
+          if (floatingSubtotal) floatingSubtotal.textContent = `${toArabicDigits(subtotal)} ج.م`;
+          if (floatingBadge) floatingBadge.textContent = toArabicDigits(totalQty);
+          floatingBar.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+          floatingBar.classList.add('translate-y-0', 'opacity-100', 'pointer-events-auto');
+        } else {
+          floatingBar.classList.remove('translate-y-0', 'opacity-100', 'pointer-events-auto');
+          floatingBar.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+        }
+      }
+
+      // رسم أصناف السلة
+      const container = document.getElementById('cart-items-container');
+      const footer = document.getElementById('cart-footer');
+      if (!container) return;
+
+      if (cart.length === 0) {
+        container.innerHTML = `
+          <div class="h-full flex flex-col items-center justify-center text-center py-16 px-4 space-y-4">
+            <div class="w-16 h-16 rounded-full bg-cream-200/80 flex items-center justify-center text-3xl text-caramel/60 shadow-xs">
+              <i class="fa-solid fa-cookie-bite"></i>
+            </div>
+            <div>
+              <h4 class="font-extrabold text-base text-choco-950 mb-1">سلتك فارغة..</h4>
+              <p class="text-xs text-[#5C4538] max-w-xs mx-auto">دلل نفسك بحلوى ومخبوزات طازجة تخرج من الفرن الآن</p>
+            </div>
+            <button 
+              type="button" 
+              onclick="toggleCart(false)" 
+              class="inline-flex items-center gap-2 bg-choco-900 text-cream-50 text-xs font-bold px-6 py-2.5 rounded-xl shadow-sm hover:bg-choco-800 transition-colors cursor-pointer"
+            >
+              <span>تصفح المنيو</span>
+              <i class="fa-solid fa-arrow-left text-[10px]"></i>
+            </button>
+          </div>
+        `;
+        if (footer) footer.classList.add('opacity-40', 'pointer-events-none');
+      } else {
+        if (footer) footer.classList.remove('opacity-40', 'pointer-events-none');
+        container.innerHTML = cart.map(item => {
+          const itemIdStr = String(item.cartItemId || item.id);
+          const sizeBadge = item.sizeName ? `
+            <span class="inline-flex items-center gap-1 bg-blue-500/10 text-blue-900 text-[10.5px] font-bold px-2 py-0.5 rounded-lg border border-blue-500/20">
+              <i class="fa-solid fa-ruler-combined text-[9px] text-blue-600"></i>
+              <span>حجم: ${item.sizeName}</span>
+            </span>
+          ` : '';
+          const flavorBadge = item.flavor ? `
+            <span class="inline-flex items-center gap-1 bg-amber-500/10 text-amber-900 text-[10.5px] font-bold px-2 py-0.5 rounded-lg border border-amber-500/20">
+              <i class="fa-solid fa-cookie-bite text-[9px] text-caramel"></i>
+              <span>نكهة: ${item.flavor}</span>
+            </span>
+          ` : '';
+          const weightBadge = item.weightLabel ? `
+            <span class="inline-flex items-center gap-1 bg-[#231610]/5 text-choco-900 text-[10.5px] font-bold px-2 py-0.5 rounded-lg border border-[#231610]/10">
+              <i class="fa-solid fa-scale-balanced text-[9px] text-caramel"></i>
+              <span>${item.weightLabel}</span>
+            </span>
+          ` : '';
+
+          const priceLabel = item.weightLabel ? 'سعر الوزن:' : item.sizeName ? 'سعر الحجم:' : 'سعر القطعة:';
+
+          return `
+          <div class="bg-white rounded-2xl p-3 sm:p-3.5 border border-[#231610]/10 shadow-xs hover:shadow-md transition-shadow font-cairo">
+            <div class="flex items-center gap-3">
+              <img src="${item.image}" alt="${item.name}" class="w-16 h-16 min-w-[4rem] max-w-[4rem] rounded-2xl object-cover flex-shrink-0 border border-[#231610]/10 shadow-xs" />
+              
+              <div class="flex-grow min-w-0">
+                <div class="flex items-start justify-between gap-1.5 mb-1">
+                  <h4 class="font-extrabold text-xs sm:text-sm text-choco-950 leading-snug line-clamp-1">${item.name}</h4>
+                  <button type="button" onclick="removeItemFromCart('${itemIdStr}')" class="text-choco-400 hover:text-red-600 p-1 rounded-lg hover:bg-red-50 transition-colors cursor-pointer flex-shrink-0" title="حذف">
+                    <i class="fa-regular fa-trash-can text-xs sm:text-sm"></i>
+                  </button>
+                </div>
+
+                <div class="flex flex-wrap items-center gap-1.5 mb-2">
+                  ${sizeBadge}
+                  ${flavorBadge}
+                  ${weightBadge}
+                  <span class="text-[11px] text-[#5C4538] font-medium">
+                    ${priceLabel} <strong class="text-choco-900 font-bold">${toArabicDigits(item.priceNum)} ج.م</strong>
+                  </span>
+                </div>
+
+                <div class="flex items-center justify-between pt-1.5 border-t border-[#231610]/5">
+                  <div class="flex items-center bg-[#F2EAE0] rounded-xl p-0.5 border border-[#231610]/10">
+                    <button type="button" onclick="changeItemQuantity('${itemIdStr}', -1)" class="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-white hover:bg-cream-100 text-choco-900 flex items-center justify-center text-xs font-bold shadow-xs active:scale-95 transition-all cursor-pointer" title="تقليل">
+                      <i class="fa-solid fa-minus text-[9px]"></i>
+                    </button>
+                    <span class="text-xs sm:text-sm font-bold text-choco-950 min-w-[24px] text-center">${toArabicDigits(item.quantity)}</span>
+                    <button type="button" onclick="changeItemQuantity('${itemIdStr}', 1)" class="w-6 h-6 sm:w-7 sm:h-7 rounded-lg bg-white hover:bg-cream-100 text-choco-900 flex items-center justify-center text-xs font-bold shadow-xs active:scale-95 transition-all cursor-pointer" title="زيادة">
+                      <i class="fa-solid fa-plus text-[9px]"></i>
+                    </button>
+                  </div>
+
+                  <span class="text-xs sm:text-sm font-black text-caramel">${toArabicDigits(item.priceNum * item.quantity)} ج.م</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        `;
+        }).join('');
+      }
+
+      // 7. التحقق من الحد الأدنى للطلب وتحديث التنبيه وزر إتمام الطلب
+      const minOrderAmount = typeof settings.minOrderAmount === 'number' ? settings.minOrderAmount : 100;
+      const minAlertElem = document.getElementById('min-order-alert');
+      const minMsgElem = document.getElementById('min-order-msg');
+      const minIconElem = document.getElementById('min-order-icon');
+      const checkoutBtn = document.getElementById('checkout-btn');
+
+      if (cart.length === 0) {
+        if (minAlertElem) minAlertElem.classList.add('hidden');
+      } else {
+        if (subtotal < minOrderAmount) {
+          const remaining = minOrderAmount - subtotal;
+          if (minAlertElem) {
+            minAlertElem.className = 'rounded-2xl p-3 text-xs font-bold transition-all flex items-start gap-2.5 bg-amber-50 text-amber-900 border border-amber-200/80 shadow-xs';
+            minAlertElem.classList.remove('hidden');
+          }
+          if (minIconElem) minIconElem.className = 'fa-solid fa-triangle-exclamation mt-0.5 text-sm flex-shrink-0 text-amber-600';
+          if (minMsgElem) {
+            minMsgElem.innerHTML = `الحد الأدنى للطلب هو <span class="font-black text-choco-950">${toArabicDigits(minOrderAmount)} ج.م</span>. يتبقى لك <span class="font-black text-choco-950">${toArabicDigits(remaining)} ج.م</span> إضافية لإمكانية إرسال الطلب.`;
+          }
+          if (checkoutBtn) {
+            checkoutBtn.innerHTML = `
+              <i class="fa-solid fa-bag-shopping text-base"></i>
+              <span>أضف بقيمة ${toArabicDigits(remaining)} ج.م لإتمام الطلب</span>
+            `;
+            checkoutBtn.className = "w-full inline-flex items-center justify-center gap-2.5 bg-[#EAE2D9] text-[#6E4B37] py-3.5 rounded-2xl font-bold text-sm shadow-xs cursor-pointer transition-all font-cairo hover:bg-[#E2D7CC]";
+          }
+        } else {
+          // عندما يصل العميل للحد الأدنى، تختفي رسالة التنبيه تماماً ويبقى التصميم نظيفاً
+          if (minAlertElem) minAlertElem.classList.add('hidden');
+          if (checkoutBtn) {
+            checkoutBtn.innerHTML = `
+              <i class="fa-brands fa-whatsapp text-xl"></i>
+              <span>إتمام الطلب عبر واتساب</span>
+            `;
+            checkoutBtn.className = "w-full inline-flex items-center justify-center gap-3 bg-gradient-to-r from-caramel to-caramel-hover hover:from-caramel-hover hover:to-[#915622] text-white py-4 rounded-2xl font-extrabold text-base shadow-lg shadow-caramel/25 hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 transition-all cursor-pointer font-cairo";
+          }
+        }
+      }
+    }
+
+    // 8. إشعار التوست
+    let toastTimer = null;
+    function showToast(message) {
+      const toast = document.getElementById('toast');
+      const toastMsg = document.getElementById('toast-message');
+      if (!toast || !toastMsg) return;
+
+      toastMsg.textContent = message;
+      toast.classList.remove('opacity-0', 'translate-y-4', 'pointer-events-none');
+      toast.classList.add('opacity-100', 'translate-y-0');
+
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.classList.remove('opacity-100', 'translate-y-0');
+        toast.classList.add('opacity-0', 'translate-y-4', 'pointer-events-none');
+      }, 2400);
+    }
+
+    // 9. فتح وإغلاق درج السلة الجانبي
+    function toggleCart(isOpen) {
+      const drawer = document.getElementById('cart-drawer');
+      const backdrop = document.getElementById('cart-backdrop');
+      if (!drawer || !backdrop) return;
+
+      if (isOpen) {
+        drawer.classList.remove('translate-x-full');
+        drawer.classList.add('translate-x-0');
+        backdrop.classList.remove('opacity-0', 'pointer-events-none');
+        backdrop.classList.add('opacity-100');
+        document.body.style.overflow = 'hidden';
+      } else {
+        drawer.classList.remove('translate-x-0');
+        drawer.classList.add('translate-x-full');
+        backdrop.classList.remove('opacity-100');
+        backdrop.classList.add('opacity-0', 'pointer-events-none');
+        document.body.style.overflow = '';
+      }
+    }
+
+    // 10. نافذة تأكيد الطلب
+    let currentOrderId = '';
+
+    function generateOrderId() {
+      const randomDigits = Math.floor(1000 + Math.random() * 9000);
+      return `#BS-${randomDigits}`;
+    }
+
+    function openCheckoutModal() {
+      if (cart.length === 0) return;
+
+      // فحص الحد الأدنى للطلب
+      const subtotal = cart.reduce((sum, item) => sum + (item.priceNum * item.quantity), 0);
+      const minOrderAmount = typeof settings.minOrderAmount === 'number' ? settings.minOrderAmount : 100;
+      if (subtotal < minOrderAmount) {
+        const remaining = minOrderAmount - subtotal;
+        showToast(`الحد الأدنى للطلب هو ${toArabicDigits(minOrderAmount)} ج.م (ينقصك ${toArabicDigits(remaining)} ج.م إضافية)`);
+        return;
+      }
+
+      toggleCart(false);
+
+      currentOrderId = generateOrderId();
+      const orderIdElem = document.getElementById('modal-order-id');
+      if (orderIdElem) orderIdElem.textContent = currentOrderId;
+
+      const phoneError = document.getElementById('phone-error');
+      const phoneInput = document.getElementById('cust-phone');
+      if (phoneError) phoneError.classList.add('hidden');
+      if (phoneInput) phoneInput.classList.remove('border-red-500', 'focus:border-red-500', 'focus:ring-red-200');
+
+      const modal = document.getElementById('checkout-modal');
+      if (modal) {
+        modal.classList.remove('opacity-0', 'pointer-events-none');
+        modal.classList.add('opacity-100');
+        modal.querySelector('.transform').classList.remove('scale-95');
+        modal.querySelector('.transform').classList.add('scale-100');
+      }
+    }
+
+    function closeCheckoutModal() {
+      const modal = document.getElementById('checkout-modal');
+      if (modal) {
+        modal.classList.remove('opacity-100');
+        modal.classList.add('opacity-0', 'pointer-events-none');
+        modal.querySelector('.transform').classList.remove('scale-100');
+        modal.querySelector('.transform').classList.add('scale-95');
+      }
+    }
+
+    // إرسال وتأكيد الطلب وتسجيله في لوحة التحكم الإدارية
+    function handleCheckoutSubmit(e) {
+      e.preventDefault();
+
+      // التحقق مجدداً من الحد الأدنى للطلب قبل الإرسال
+      const currentSubtotal = cart.reduce((sum, item) => sum + (item.priceNum * item.quantity), 0);
+      const minOrderVal = typeof settings.minOrderAmount === 'number' ? settings.minOrderAmount : 100;
+      if (currentSubtotal < minOrderVal) {
+        const remaining = minOrderVal - currentSubtotal;
+        Swal.fire({
+          title: 'الحد الأدنى للطلب',
+          html: `عذراً، الحد الأدنى للطلب هو <b>${toArabicDigits(minOrderVal)} ج.م</b>.<br><span class="text-xs sm:text-sm text-choco-600 mt-2 block">ينقصك <b>${toArabicDigits(remaining)} ج.م</b> لإمكانية إرسال وتأكيد الطلب.</span>`,
+          icon: 'info',
+          confirmButtonText: 'حسناً، فهمت',
+          confirmButtonColor: '#C27A38',
+          background: '#FAF7F2',
+          color: '#231610',
+          customClass: {
+            popup: 'rounded-3xl border border-[#231610]/10 shadow-2xl font-cairo',
+            confirmButton: 'rounded-xl font-bold px-6 py-2.5 shadow-md'
+          }
+        });
+        return;
+      }
+
+      const nameInput = document.getElementById('cust-name');
+      const phoneInput = document.getElementById('cust-phone');
+      const addressInput = document.getElementById('cust-address');
+      const phoneError = document.getElementById('phone-error');
+
+      const name = nameInput ? nameInput.value.trim() : '';
+      let rawPhone = phoneInput ? phoneInput.value.trim() : '';
+      const address = addressInput ? addressInput.value.trim() : '';
+
+      if (!name || !rawPhone || !address) return;
+
+      // تنظيف رقم الهاتف وتحويل أي أرقام شرقية إلى إنجليزية
+      let phone = rawPhone
+        .replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d))
+        .replace(/[\s\-\+]/g, '');
+      if (phone.startsWith('20')) phone = phone.substring(2);
+
+      // التحقق من رقم الهاتف المصري (11 رقم يبدأ بـ 010 أو 011 أو 012 أو 015)
+      const phoneRegex = /^01[0125][0-9]{8}$/;
+      if (!phoneRegex.test(phone)) {
+        if (phoneError) phoneError.classList.remove('hidden');
+        if (phoneInput) {
+          phoneInput.classList.add('border-red-500', 'focus:border-red-500', 'focus:ring-red-200');
+          phoneInput.focus();
+        }
+        return;
+      } else {
+        if (phoneError) phoneError.classList.add('hidden');
+        if (phoneInput) phoneInput.classList.remove('border-red-500', 'focus:border-red-500', 'focus:ring-red-200');
+      }
+
+      if (!currentOrderId) {
+        currentOrderId = generateOrderId();
+      }
+
+      const subtotal = cart.reduce((sum, item) => sum + (item.priceNum * item.quantity), 0);
+      const deliveryFeeRate = typeof settings.deliveryFee === 'number' ? settings.deliveryFee : 40;
+      const deliveryFee = deliveryFeeRate;
+      const grandTotal = subtotal + deliveryFee;
+      const itemsList = cart.map(item => {
+        const sizeStr = item.sizeName ? ` [حجم: ${item.sizeName}]` : '';
+        const weightStr = item.weightLabel ? ` [${item.weightLabel}]` : '';
+        const flavorStr = item.flavor ? ` (نكهة: ${item.flavor})` : '';
+        const baseName = item.baseName || item.name;
+        return `• ${baseName}${sizeStr}${weightStr}${flavorStr} × ${item.quantity} = ${item.priceNum * item.quantity} ج.م`;
+      }).join('\n');
+      
+      const now = new Date();
+      const orderDate = now.toLocaleDateString('ar-EG', { 
+        weekday: 'long', 
+        year: 'numeric', 
+        month: 'long', 
+        day: 'numeric',
+        hour: '2-digit', 
+        minute: '2-digit' 
+      });
+
+      // 1. بناء كائن الطلب وحفظه مباشرة في مصفوفة أوردرات لوحة التحكم
+      const newOrder = {
+        id: currentOrderId,
+        createdAt: Date.now(),
+        dateFormatted: orderDate,
+        customer: {
+          name: name,
+          phone: phone,
+          address: address
+        },
+        items: cart.map(item => ({
+          id: item.id,
+          name: item.name,
+          baseName: item.baseName || item.name,
+          sizeName: item.sizeName || null,
+          weightLabel: item.weightLabel || null,
+          flavor: item.flavor || null,
+          flavorPrice: item.flavorPrice || 0,
+          price: item.priceNum,
+          quantity: item.quantity
+        })),
+        subtotal: subtotal,
+        deliveryFee: deliveryFee,
+        grandTotal: grandTotal,
+        status: 'new'
+      };
+
+      const orders = getStoredData(KEYS.ORDERS, []);
+      orders.unshift(newOrder);
+      setStoredData(KEYS.ORDERS, orders);
+
+      // حفظ الطلب فوراً في قاعدة بيانات Firestore السحابية
+      if (db) {
+        db.collection('orders').doc(currentOrderId).set(newOrder).catch(err => {
+          console.error("Firestore order save error:", err);
+        });
+      }
+
+      // 2. إعداد رسالة الواتساب
+      const whatsappMessage = `🍰 *طلب جديد من بوسي سويت (Bosy Sweet)*
+------------------------------------
+🔖 *رقم الطلب:* ${currentOrderId}
+📅 *التاريخ:* ${orderDate}
+------------------------------------
+👤 *اسم العميل:* ${name}
+📱 *رقم الهاتف:* ${phone}
+📍 *العنوان وملاحظات التوصيل:* ${address}
+------------------------------------
+🧁 *تفاصيل الأصناف المطلوبة:*
+${itemsList}
+------------------------------------
+💵 *مجموع المنتجات:* ${subtotal} ج.م
+🛵 *رسوم التوصيل:* ${deliveryFee} ج.م
+💰 *الإجمالي الكلي المطلوب:* ${grandTotal} ج.م
+------------------------------------
+✨ *شكراً لاختياركم بوسي سويت.. نخبز لكم بكل حب وفرح!* ✨`;
+
+      const targetPhone = (settings.whatsappPhone || "201068617307").replace(/[^0-9]/g, '');
+      const whatsappUrl = `https://wa.me/${targetPhone}?text=${encodeURIComponent(whatsappMessage)}`;
+
+      window.open(whatsappUrl, '_blank');
+      closeCheckoutModal();
+
+      // مسح السلة وتحديث الواجهة
+      const sentOrderId = currentOrderId;
+      cart = [];
+      saveCartToStorage();
+      updateCartUI();
+      renderProducts(currentFilter);
+      showToast(`تم تسجيل طلبك ${sentOrderId} بنجاح وتحويله للواتساب! شكراً لذوقك`);
+
+      if (document.getElementById('checkout-form')) {
+        document.getElementById('checkout-form').reset();
+      }
+    }
+
+    // إزالة رسالة خطأ الهاتف فور بدء الكتابة
+    const custPhoneEl = document.getElementById('cust-phone');
+    if (custPhoneEl) {
+      custPhoneEl.addEventListener('input', () => {
+        const phoneError = document.getElementById('phone-error');
+        if (phoneError && !phoneError.classList.contains('hidden')) {
+          phoneError.classList.add('hidden');
+          custPhoneEl.classList.remove('border-red-500', 'focus:border-red-500', 'focus:ring-red-200');
+        }
+      });
+    }
+
+    // 11. الخط المتحرك للنافبار بدون أي اهتزاز أو تردد (Smooth Gliding Indicator)
+    const navLinks = document.querySelectorAll('#desktop-nav .nav-link');
+    const indicator = document.getElementById('nav-indicator');
+    let isClickScrolling = false;
+    let clickScrollTimer = null;
+
+    function updateNavIndicator(activeLink, isInstant = false) {
+      if (!activeLink || !indicator) return;
+
+      if (isInstant) {
+        indicator.style.transition = 'none';
+        indicator.style.width = `${activeLink.offsetWidth}px`;
+        indicator.style.left = `${activeLink.offsetLeft}px`;
+        indicator.classList.remove('opacity-0');
+        indicator.classList.add('opacity-100');
+        requestAnimationFrame(() => {
+          requestAnimationFrame(() => {
+            indicator.style.transition = 'all 350ms cubic-bezier(0.4, 0, 0.2, 1)';
+          });
+        });
+      } else {
+        indicator.style.transition = 'all 350ms cubic-bezier(0.4, 0, 0.2, 1)';
+        indicator.style.width = `${activeLink.offsetWidth}px`;
+        indicator.style.left = `${activeLink.offsetLeft}px`;
+        indicator.classList.remove('opacity-0');
+        indicator.classList.add('opacity-100');
+      }
+
+      navLinks.forEach(link => {
+        if (link === activeLink) {
+          link.classList.remove('text-choco-700/60');
+          link.classList.add('text-choco-900');
+        } else {
+          link.classList.remove('text-choco-900');
+          link.classList.add('text-choco-700/60');
+        }
+      });
+    }
+
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        isClickScrolling = true;
+        updateNavIndicator(link, false);
+
+        clearTimeout(clickScrollTimer);
+        clickScrollTimer = setTimeout(() => {
+          isClickScrolling = false;
+        }, 750);
+      });
+    });
+
+    const trackedSections = ['home', 'menu', 'about', 'contact'].map(id => document.getElementById(id)).filter(Boolean);
+
+    window.addEventListener('scroll', () => {
+      if (isClickScrolling) return;
+
+      const scrollPos = window.scrollY + 140;
+      let currentSectionId = 'home';
+
+      trackedSections.forEach(section => {
+        if (scrollPos >= section.offsetTop) {
+          currentSectionId = section.id;
+        }
+      });
+
+      const matchingLink = document.querySelector(`#desktop-nav .nav-link[href="#${currentSectionId}"]`);
+      if (matchingLink) {
+        updateNavIndicator(matchingLink, false);
+      }
+    }, { passive: true });
+
+    window.addEventListener('resize', () => {
+      const activeLink = document.querySelector('#desktop-nav .nav-link.text-choco-900') || navLinks[0];
+      updateNavIndicator(activeLink, true);
+    });
+
+    // 12. قائمة الموبايل
+    const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuIcon = document.getElementById('menu-icon');
+
+    if (mobileMenuBtn && mobileMenu) {
+      mobileMenuBtn.addEventListener('click', () => {
+        const isHidden = mobileMenu.classList.contains('hidden');
+        if (isHidden) {
+          mobileMenu.classList.remove('hidden');
+          menuIcon.classList.remove('fa-bars');
+          menuIcon.classList.add('fa-xmark');
+        } else {
+          mobileMenu.classList.add('hidden');
+          menuIcon.classList.remove('fa-xmark');
+          menuIcon.classList.add('fa-bars');
+        }
+      });
+
+      mobileMenu.querySelectorAll('.mobile-nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.add('hidden');
+          menuIcon.classList.remove('fa-xmark');
+          menuIcon.classList.add('fa-bars');
+        });
+      });
+    }
+
+    // 13. المزامنة اللحظية الفورية (Real-time Cross-tab Sync)
+    window.addEventListener('storage', (e) => {
+      if (e.key === KEYS.PRODUCTS) {
+        products = getStoredData(KEYS.PRODUCTS, DEFAULT_PRODUCTS);
+        renderProducts(currentFilter);
+      }
+      if (e.key === KEYS.CATEGORIES) {
+        categories = getStoredData(KEYS.CATEGORIES, DEFAULT_CATEGORIES);
+        renderCategoryFilters();
+        if (!categories.find(c => c.id === currentFilter)) {
+          currentFilter = 'all';
+        }
+        renderProducts(currentFilter);
+      }
+      if (e.key === KEYS.SETTINGS) {
+        settings = getStoredData(KEYS.SETTINGS, DEFAULT_SETTINGS);
+        applySettingsUI();
+        updateCartUI();
+      }
+      if (e.key === KEYS.CART) {
+        cart = loadCartFromStorage();
+        updateCartUI();
+        renderProducts(currentFilter);
+      }
+    });
+
+    // دورة فحص دورية خفيفة لمزامنة المتجر في نفس النافذة
+    setInterval(() => {
+      const storedSettings = getStoredData(KEYS.SETTINGS, DEFAULT_SETTINGS);
+      if (JSON.stringify(storedSettings) !== JSON.stringify(settings)) {
+        settings = storedSettings;
+        applySettingsUI();
+        updateCartUI();
+      }
+      const storedProducts = getStoredData(KEYS.PRODUCTS, DEFAULT_PRODUCTS);
+      if (JSON.stringify(storedProducts) !== JSON.stringify(products)) {
+        products = storedProducts;
+        renderProducts(currentFilter);
+      }
+      const storedCategories = getStoredData(KEYS.CATEGORIES, DEFAULT_CATEGORIES);
+      if (JSON.stringify(storedCategories) !== JSON.stringify(categories)) {
+        categories = storedCategories;
+        renderCategoryFilters();
+        renderProducts(currentFilter);
+      }
+    }, 2500);
+
+    // 14. حركة الظهور الانسيابية أثناء النزول بالسكرول (Smooth Scroll Entrance)
+    function initScrollReveal() {
+      const revealElements = document.querySelectorAll('.reveal-on-scroll');
+      if (!revealElements.length) return;
+
+      if (!('IntersectionObserver' in window)) {
+        revealElements.forEach(el => el.classList.add('revealed'));
+        return;
+      }
+
+      // إظهار العناصر الموجودة بالفعل داخل إطار الرؤية فوراً بدون أي وميض أو تأخير
+      const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+      revealElements.forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < windowHeight && rect.bottom > 0) {
+          el.classList.add('revealed');
+        }
+      });
+
+      const observer = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('revealed');
+            obs.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.08,
+        rootMargin: '0px 0px -30px 0px'
+      });
+
+      revealElements.forEach(el => {
+        if (!el.classList.contains('revealed')) {
+          observer.observe(el);
+        }
+      });
+    }
+
+    // 15. الاستماع اللحظي لقاعدة بيانات Firestore السحابية (Real-time Cloud Sync)
+    function initFirebaseListeners() {
+      if (!db) return;
+
+      // 1. الاستماع اللحظي لإعدادات المتجر العامة (رسوم التوصيل، روابط السوشيال، أوقات العمل، الواتساب)
+      db.collection('settings').doc('store').onSnapshot((doc) => {
+        if (doc.exists) {
+          const cloudSettings = doc.data();
+          const merged = { ...DEFAULT_SETTINGS, ...cloudSettings };
+          const isSameSettings = JSON.stringify(merged) === JSON.stringify(settings);
+          settings = merged;
+          setStoredData(KEYS.SETTINGS, settings);
+          if (!isSameSettings) {
+            applySettingsUI();
+          }
+        }
+      }, (err) => console.warn("Firestore settings sync fallback:", err));
+
+      // 2. الاستماع اللحظي للمنتجات (الأسعار، الصور، النكهات، وحالة التوفر 'نفدت الكمية')
+      db.collection('products').onSnapshot((snapshot) => {
+        const cloudProds = [];
+        snapshot.forEach(doc => {
+          const data = doc.data();
+          if (data && data.name && data.name !== 'undefined') {
+            const prodId = data.id !== undefined && data.id !== null ? data.id : (parseInt(doc.id) || doc.id);
+            cloudProds.push({ ...data, id: prodId });
+          }
+        });
+        cloudProds.sort((a, b) => (a.id || 0) - (b.id || 0));
+
+        // دائماً نحدّث المنتجات ونُعيد الرسم عند وصول أي snapshot من Firestore
+        // حتى لو فارغة، لمنع ظهور بيانات localStorage القديمة وإخفاؤها لاحقاً
+        products = cloudProds;
+        setStoredData(KEYS.PRODUCTS, cloudProds);
+        renderProducts(currentFilter);
+        renderCategoryFilters();
+      }, (err) => console.warn("Firestore products sync fallback:", err));
+
+      // 3. الاستماع اللحظي لأقسام وتبويبات المنيو
+      db.collection('categories').onSnapshot((snapshot) => {
+        if (!snapshot.empty) {
+          const cloudCats = [];
+          snapshot.forEach(doc => cloudCats.push(doc.data()));
+          cloudCats.sort((a, b) => a.id === 'all' ? -1 : b.id === 'all' ? 1 : 0);
+          const isSameCats = JSON.stringify(cloudCats) === JSON.stringify(categories);
+          categories = cloudCats;
+          setStoredData(KEYS.CATEGORIES, cloudCats);
+          if (!isSameCats) {
+            renderCategoryFilters();
+          }
+        }
+      }, (err) => console.warn("Firestore categories sync fallback:", err));
+    }
+
+    // 16. التهيئة المبدئية عند التحميل
+    function initApp() {
+      loadAllData();
+      renderCategoryFilters();
+      renderProducts('all');
+      updateCartUI(true);
+
+      // تحديد الرابط النشط فوراً بناءً على الـ Hash أو موضع التمرير لمنع أي ارتداد بصري
+      let initialActive = null;
+      if (window.location.hash) {
+        initialActive = document.querySelector(`#desktop-nav .nav-link[href="${window.location.hash}"]`);
+      }
+      if (!initialActive) {
+        const scrollPos = window.scrollY + 140;
+        let currentSectionId = 'home';
+        trackedSections.forEach(section => {
+          if (scrollPos >= section.offsetTop) {
+            currentSectionId = section.id;
+          }
+        });
+        initialActive = document.querySelector(`#desktop-nav .nav-link[href="#${currentSectionId}"]`);
+      }
+      if (!initialActive) initialActive = navLinks[0];
+      updateNavIndicator(initialActive, true);
+
+      initScrollReveal();
+      initFirebaseListeners();
+
+      // تفعيل السكروول الناعم بعد اكتمال التحميل المبدئي للحفاظ على ثبات الموقع تماماً عند الريفريش
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          document.documentElement.classList.add('page-ready');
+        });
+      });
+    }
+
+    // تشغيل التهيئة فوراً وبشكل متزامن لبناء الواجهة والمنتجات قبل رسم أول إطار بالمتصفح (Zero-Flicker Init)
+    initApp();
+
+    if (document.fonts) {
+      document.fonts.ready.then(() => {
+        const activeLink = document.querySelector('#desktop-nav .nav-link.text-choco-900') || navLinks[0];
+        updateNavIndicator(activeLink, true);
+      });
+    }
+  </script>
+
+</body>
+</html>
